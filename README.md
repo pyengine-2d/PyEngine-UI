@@ -1,3 +1,5 @@
+![PyEngine logo](pyengine_ui/logo.png "PyEngine logo")
+
 # PyEngine-UI
 
 UI for PyEngine
