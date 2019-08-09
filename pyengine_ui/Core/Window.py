@@ -25,3 +25,6 @@ class Window(QMainWindow):
         self.showMaximized()
         self.setWindowTitle('PyEngine')
 
+        self.projectWindow = ProjectWindow(self)
+        self.projectWindow.setWindowModality(Qt.ApplicationModal)
+        self.projectWindow.show()
