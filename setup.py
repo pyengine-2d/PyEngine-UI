@@ -32,6 +32,11 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Intended Audience :: Developers",
     ],
+    entry_points={
+        'console_scripts':[
+            'pyengine = pyengine_ui.pyengine_app:launch',
+        ],
+    },
     install_requires=['PyEngine-2D', 'PyQt5']
 
 )
