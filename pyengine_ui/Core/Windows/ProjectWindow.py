@@ -21,16 +21,16 @@ class ProjectWindow(QDialog):
         self.nameLabel = Label("Nom", 12)
         self.nameLabel.setAlignment(Qt.AlignHCenter)
         self.nameInput = QLineEdit()
-        self.folderLabel = Label("Folder", 12)
+        self.folderLabel = Label("Dossier", 12)
         self.folderLabel.setAlignment(Qt.AlignHCenter)
         self.folderButton = QPushButton("Selectionner")
         self.go = QPushButton("Entrer")
         self.cancel = QPushButton("Annuler")
         self.spacerItem = QSpacerItem(20, 25)
 
-        self.go.clicked.connect(self.closeWindow)
+        self.go.clicked.connect(self.close_window)
         self.cancel.clicked.connect(self.close)
-        self.folderButton.clicked.connect(self.getFolder)
+        self.folderButton.clicked.connect(self.get_folder)
 
         self.grid.addWidget(self.title, 0, 0, 1, 2)
         self.grid.addItem(self.spacerItem, 1, 0)
@@ -52,12 +52,12 @@ class ProjectWindow(QDialog):
         self.setWindowFlags(Qt.WindowTitleHint)
         self.setWindowFlags(Qt.WindowCloseButtonHint)
 
-    def getFolder(self):
+    def get_folder(self):
         directory = os.environ.get('HOME', os.environ.get('USERPROFILE', os.path.dirname(__file__)))
         self.folder = QFileDialog.getExistingDirectory(self, "Dossier du projet", directory,
                                                        QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks)
 
-    def closeWindow(self):
+    def close_window(self):
         if self.nameInput.text() is None or self.nameInput.text() == "" or self.folder is None or self.folder == "":
             QMessageBox.warning(self, "Erreur", "Le nom ou le dossier du projet est incorrect")
         else:
