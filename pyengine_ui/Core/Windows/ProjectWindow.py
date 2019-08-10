@@ -62,6 +62,8 @@ class ProjectWindow(QDialog):
             QMessageBox.warning(self, "Erreur", "Le nom ou le dossier du projet est incorrect")
         else:
             self.parent_close = False
+            self.parent.project_name = self.nameInput.text()
+            self.parent.project_folder = self.folder
             self.close()
 
     def closeEvent(self, event):
