@@ -19,8 +19,12 @@ class Window(QMainWindow):
 
         self.title = Label("PyEngine", 15)
         self.title.setAlignment(Qt.AlignHCenter)
+        self.temp = QPushButton("Info Project")
+
+        self.temp.clicked.connect(self.info_project)
 
         self.grid.addWidget(self.title, 0, 0)
+        self.grid.addWidget(self.temp, 1, 0)
 
         self.grid.setContentsMargins(0, 0, 0, 0)
         self.grid.setSpacing(0)
