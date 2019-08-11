@@ -1,9 +1,9 @@
 import os
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout
 
-from pyengine_ui.Core.Utils import parsetheme
+from pyengine_ui.Core.Utils import parsetheme, Project
 from pyengine_ui.Core.Widgets import Label
 from pyengine_ui.Core.Windows import ProjectWindow
 
@@ -11,8 +11,7 @@ from pyengine_ui.Core.Windows import ProjectWindow
 class Window(QMainWindow):
     def __init__(self):
         super(Window, self).__init__()
-        self.project_folder = None
-        self.project_name = None
+        self.project = Project()
 
         self.centralWidget = QWidget()
         self.grid = QGridLayout(self.centralWidget)
@@ -29,19 +28,21 @@ class Window(QMainWindow):
         self.grid.setContentsMargins(0, 0, 0, 0)
         self.grid.setSpacing(0)
         self.setCentralWidget(self.centralWidget)
-        self.showMaximized()
         self.setWindowTitle('PyEngine')
 
         self.projectWindow = ProjectWindow(self)
-        self.projectWindow.setWindowModality(Qt.ApplicationModal)
         self.projectWindow.show()
 
         self.theme = "Themes/default"
         self.applytheme()
 
+    def setup_project(self):
+        os.makedirs(self.project.project_folder+"/"+self.project.project_name, exist_ok=True)
+        self.setWindowTitle('PyEngine - '+self.project.project_name)
+
     def info_project(self):
-        print(self.project_name)
-        print(self.project_folder)
+        print(self.project.project_name)
+        print(self.project.project_folder)
 
     def applytheme(self):
         if self.theme == "" or self.theme == os.path.join(os.path.dirname(__file__), "..", "Themes"):

@@ -10,7 +10,6 @@ class ProjectWindow(QDialog):
     def __init__(self, parent):
         super(ProjectWindow, self).__init__()
         self.parent = parent
-        self.parent_close = True
         self.folder = ""
         self.setWindowTitle("PyEngine - Projet")
 
@@ -61,15 +60,11 @@ class ProjectWindow(QDialog):
         if self.nameInput.text() is None or self.nameInput.text() == "" or self.folder is None or self.folder == "":
             QMessageBox.warning(self, "Erreur", "Le nom ou le dossier du projet est incorrect")
         else:
-            self.parent_close = False
-            self.parent.project_name = self.nameInput.text()
-            self.parent.project_folder = self.folder
+            self.parent.project.project_name = self.nameInput.text()
+            self.parent.project.project_folder = self.folder
+            self.parent.setup_project()
             self.close()
-
-    def closeEvent(self, event):
-        if self.parent_close:
-            self.parent.close()
-        event.accept()
+            self.parent.showMaximized()
 
 
 

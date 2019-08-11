@@ -14,8 +14,7 @@ def launch():
     icon = QIcon(os.path.join(os.path.dirname(__file__), 'logo.png'))
     app.setWindowIcon(icon)
 
-    win = Window()
-    win.show()
+    Window()
 
     app.exec_()
 
