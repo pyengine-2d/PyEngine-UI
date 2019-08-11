@@ -16,14 +16,17 @@ class Window(QMainWindow):
         self.centralWidget = QWidget()
         self.grid = QGridLayout(self.centralWidget)
 
-        self.title = Label("PyEngine", 15)
-        self.title.setAlignment(Qt.AlignHCenter)
-        self.temp = QPushButton("Info Project")
+        lelement = Label("Elements du Projet", 15)
+        lelement.setAlignment(Qt.AlignHCenter)
+        self.grid.addWidget(lelement, 0, 0)
 
-        self.temp.clicked.connect(self.info_project)
+        laffichage = Label("Affichage du Projet", 15)
+        laffichage.setAlignment(Qt.AlignHCenter)
+        self.grid.addWidget(laffichage, 0, 1)
 
-        self.grid.addWidget(self.title, 0, 0)
-        self.grid.addWidget(self.temp, 1, 0)
+        lprop = Label("Propriétés", 15)
+        lprop.setAlignment(Qt.AlignHCenter)
+        self.grid.addWidget(lprop, 0, 2)
 
         self.grid.setContentsMargins(0, 0, 0, 0)
         self.grid.setSpacing(0)
