@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout
 
 from pyengine_ui.Core.Utils import parsetheme, Project
 from pyengine_ui.Core.Widgets import Label
-from pyengine_ui.Core.Windows import ProjectWindow
+from pyengine_ui.Core.Windows import LaunchWindow, InformationsWindow
 
 
 class Window(QMainWindow):
@@ -24,6 +24,7 @@ class Window(QMainWindow):
 
         self.windows = {
             "launch": LaunchWindow(self),
+            "info": InformationsWindow(self)
         }
 
         self.windows["launch"].show()
