@@ -16,25 +16,16 @@ class Window(QMainWindow):
         self.centralWidget = QWidget()
         self.grid = QGridLayout(self.centralWidget)
 
-        lelement = Label("Elements du Projet", 15)
-        lelement.setAlignment(Qt.AlignHCenter)
-        self.grid.addWidget(lelement, 0, 0)
+        self.lelement = Label("Elements du Projet", 15)
+        self.laffichage = Label("Affichage du Projet", 15)
+        self.lprop = Label("Propriétés", 15)
 
-        laffichage = Label("Affichage du Projet", 15)
-        laffichage.setAlignment(Qt.AlignHCenter)
-        self.grid.addWidget(laffichage, 0, 1)
+        self.setup_ui()
 
-        lprop = Label("Propriétés", 15)
-        lprop.setAlignment(Qt.AlignHCenter)
-        self.grid.addWidget(lprop, 0, 2)
         self.windows = {
             "launch": LaunchWindow(self),
         }
 
-        self.grid.setContentsMargins(0, 0, 0, 0)
-        self.grid.setSpacing(0)
-        self.setCentralWidget(self.centralWidget)
-        self.setWindowTitle('PyEngine')
         self.windows["launch"].show()
 
 
@@ -57,3 +48,30 @@ class Window(QMainWindow):
             self.setStyleSheet(pss)
             for i in self.windows.values():
                 i.setStyleSheet(pss)
+
+    def open_window(self, type_):
+        self.windows[type_].setWindowModality(Qt.ApplicationModal)
+        self.windows[type_].show()
+
+    def setup_ui(self):
+        project = self.menuBar().addMenu("Projet")
+        project.addAction("Modifier")
+        project.addAction("Sauvegarder")
+        project.addAction("Lancer")
+        project.addAction("Nouveau Projet")
+
+        parameters = self.menuBar().addMenu("Paramètres")
+        parameters.addAction("Thèmes")
+        parameters.addAction("A Propos", lambda: self.open_window("info"))
+
+        self.lelement.setAlignment(Qt.AlignHCenter)
+        self.grid.addWidget(self.lelement, 0, 0)
+        self.laffichage.setAlignment(Qt.AlignHCenter)
+        self.grid.addWidget(self.laffichage, 0, 1)
+        self.lprop.setAlignment(Qt.AlignHCenter)
+        self.grid.addWidget(self.lprop, 0, 2)
+
+        self.grid.setContentsMargins(0, 0, 0, 0)
+        self.grid.setSpacing(0)
+        self.setCentralWidget(self.centralWidget)
+        self.setWindowTitle('PyEngine')
