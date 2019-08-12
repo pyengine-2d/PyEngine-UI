@@ -27,14 +27,16 @@ class Window(QMainWindow):
         lprop = Label("Propriétés", 15)
         lprop.setAlignment(Qt.AlignHCenter)
         self.grid.addWidget(lprop, 0, 2)
+        self.windows = {
+            "launch": LaunchWindow(self),
+        }
 
         self.grid.setContentsMargins(0, 0, 0, 0)
         self.grid.setSpacing(0)
         self.setCentralWidget(self.centralWidget)
         self.setWindowTitle('PyEngine')
+        self.windows["launch"].show()
 
-        self.projectWindow = ProjectWindow(self)
-        self.projectWindow.show()
 
         self.theme = "Themes/default"
         self.applytheme()
@@ -53,4 +55,5 @@ class Window(QMainWindow):
         with open(self.theme + "/main.pss", 'r') as fichier:
             pss = parsetheme(fichier.read(), self.theme)
             self.setStyleSheet(pss)
-            self.projectWindow.setStyleSheet(pss)
+            for i in self.windows.values():
+                i.setStyleSheet(pss)

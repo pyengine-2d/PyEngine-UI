@@ -1,1 +1,1 @@
-from pyengine_ui.Core.Windows.ProjectWindow import ProjectWindow
+from pyengine_ui.Core.Windows.LaunchWindow import LaunchWindow

@@ -6,9 +6,9 @@ from PyQt5.QtWidgets import QDialog, QGridLayout, QPushButton, QLineEdit, QSpace
 from pyengine_ui.Core.Widgets import Label
 
 
-class ProjectWindow(QDialog):
+class LaunchWindow(QDialog):
     def __init__(self, parent):
-        super(ProjectWindow, self).__init__()
+        super(LaunchWindow, self).__init__()
         self.parent = parent
         self.folder = ""
         self.setWindowTitle("PyEngine - Projet")
