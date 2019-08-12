@@ -1,10 +1,10 @@
 import os
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout
+from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QVBoxLayout, QPushButton
 
-from pyengine_ui.Core.Utils import parsetheme, Project
-from pyengine_ui.Core.Widgets import Label
+from pyengine_ui.Core.Utils import parsetheme, Project, Object
+from pyengine_ui.Core.Widgets import Label, ElementsWidget, PropertiesWidget
 from pyengine_ui.Core.Windows import LaunchWindow, InformationsWindow
 
 
@@ -16,9 +16,11 @@ class Window(QMainWindow):
         self.centralWidget = QWidget()
         self.grid = QGridLayout(self.centralWidget)
 
-        self.lelement = Label("Elements du Projet", 15)
+        self.elements = ElementsWidget(self)
+        self.elementadder = QPushButton("Ajouter un élément")
         self.laffichage = Label("Affichage du Projet", 15)
-        self.lprop = Label("Propriétés", 15)
+
+        self.properties = PropertiesWidget(Object("Aucun"))
 
         self.setup_ui()
 
@@ -64,13 +66,19 @@ class Window(QMainWindow):
         parameters.addAction("Thèmes")
         parameters.addAction("A Propos", lambda: self.open_window("info"))
 
-        self.lelement.setAlignment(Qt.AlignHCenter)
-        self.grid.addWidget(self.lelement, 0, 0)
+        layout_left = QVBoxLayout()
+        layout_left.addWidget(self.elements)
+        layout_left.addWidget(self.elementadder)
+        self.grid.addLayout(layout_left, 0, 0)
+
         self.laffichage.setAlignment(Qt.AlignHCenter)
         self.grid.addWidget(self.laffichage, 0, 1)
-        self.lprop.setAlignment(Qt.AlignHCenter)
-        self.grid.addWidget(self.lprop, 0, 2)
 
+        self.grid.addWidget(self.properties, 0, 2)
+
+        self.grid.setColumnStretch(0, 2)
+        self.grid.setColumnStretch(1, 3)
+        self.grid.setColumnStretch(2, 2)
         self.grid.setContentsMargins(0, 0, 0, 0)
         self.grid.setSpacing(0)
         self.setCentralWidget(self.centralWidget)
