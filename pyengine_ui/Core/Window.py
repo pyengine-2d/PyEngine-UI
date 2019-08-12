@@ -28,8 +28,7 @@ class Window(QMainWindow):
 
         self.windows["launch"].show()
 
-
-        self.theme = "Themes/default"
+        self.theme = os.path.join(os.path.dirname(__file__), "..", "Themes", "default")
         self.applytheme()
 
     def setup_project(self):
@@ -42,8 +41,8 @@ class Window(QMainWindow):
 
     def applytheme(self):
         if self.theme == "" or self.theme == os.path.join(os.path.dirname(__file__), "..", "Themes"):
-            self.theme = "Themes/default"
-        with open(self.theme + "/main.pss", 'r') as fichier:
+            self.theme = os.path.join(os.path.dirname(__file__), "..", "Themes", "default")
+        with open(os.path.join(self.theme, "main.pss"), 'r') as fichier:
             pss = parsetheme(fichier.read(), self.theme)
             self.setStyleSheet(pss)
             for i in self.windows.values():
