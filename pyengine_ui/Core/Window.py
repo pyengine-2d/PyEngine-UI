@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QVBoxLayout, QPus
 
 from pyengine_ui.Core.Utils import parsetheme, Project, Object
 from pyengine_ui.Core.Widgets import Label, ElementsWidget, PropertiesWidget
-from pyengine_ui.Core.Windows import LaunchWindow, InformationsWindow
+from pyengine_ui.Core.Windows import LaunchWindow, InformationsWindow, ProjectWindow
 
 
 class Window(QMainWindow):
@@ -26,7 +26,8 @@ class Window(QMainWindow):
 
         self.windows = {
             "launch": LaunchWindow(self),
-            "info": InformationsWindow(self)
+            "info": InformationsWindow(self),
+            "project" : ProjectWindow(self)
         }
 
         self.windows["launch"].show()
@@ -52,13 +53,15 @@ class Window(QMainWindow):
                 i.setStyleSheet(pss)
 
     def open_window(self, type_):
+        self.windows[type_].update()
         self.windows[type_].setWindowModality(Qt.ApplicationModal)
         self.windows[type_].show()
 
     def setup_ui(self):
         project = self.menuBar().addMenu("Projet")
-        project.addAction("Modifier")
+        project.addAction("Modifier", lambda: self.open_window("project"))
         project.addAction("Sauvegarder")
+        project.addAction("Contruire")
         project.addAction("Lancer")
         project.addAction("Nouveau Projet")
 

@@ -1,9 +1,12 @@
 properties = {
     "Window": {
-        "width": "int",
-        "height": "int",
-        "title": "str",
-        "debug": "bool"
+        "Largeur": "int",
+        "Hauteur": "int",
+        "Titre": "str",
+        "Icon": "file",
+        "FPS Max": "int",
+        "Update /s": "int",
+        "Debug": "bool"
     }
 }
 
@@ -17,6 +20,6 @@ class Object:
         self.properties = {k: None for k in get_properties(type_).keys()}
         self.type_ = type_
 
-    def set_properties(self, nom, value):
+    def set_property(self, nom, value):
         if nom in self.properties.keys():
             self.properties[nom] = value
