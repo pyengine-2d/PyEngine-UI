@@ -1,3 +1,4 @@
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QTreeWidgetItem, QTreeWidget
 
 from pyengine_ui.Core.Widgets.PropertiesWidget import PropertiesWidget
@@ -11,7 +12,9 @@ class ElementsWidget(QTreeWidget):
         self.setHeaderLabel("Elements du Projet")
 
         self.window = QTreeWidgetItem(["Window"])
+        self.world = QTreeWidgetItem(["World"])
         self.addTopLevelItem(self.window)
+        self.addTopLevelItem(self.world)
         self.expandAll()
 
         self.itemClicked.connect(self.clickedItem)

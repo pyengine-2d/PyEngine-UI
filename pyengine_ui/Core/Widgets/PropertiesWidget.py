@@ -19,35 +19,37 @@ class PropertiesWidget(QWidget):
         title.setMinimumHeight(80)
         title.setAlignment(Qt.AlignHCenter)
         self.grid.addWidget(title, 0, 0, 1, 2)
+        self.grid.setRowStretch(0, 1)
 
         nb = 1
-        for n, t in get_properties(self.obj.type_).items():
-            label = Label(n, 12)
+        for p in get_properties(self.obj.type_):
+            label = Label(p[0], 12)
             label.setMaximumHeight(50)
             label.setMinimumHeight(50)
             label.setAlignment(Qt.AlignCenter)
             self.grid.addWidget(label, nb, 0)
 
-            if t == "str":
+            if p[1] == "str":
                 widget = QLineEdit()
-                widget.setText(self.obj.properties.get(n, ""))
-                widget.textChanged.connect(lambda text="", prop=n: self.set_text_for(text, prop))
-            elif t == "bool":
+                widget.setText(self.obj.properties.get(p[0], ""))
+                widget.textChanged.connect(lambda text="", prop=p[0]: self.set_text_for(text, prop))
+            elif p[1] == "bool":
                 widget = QCheckBox()
-                if self.obj.properties.get(n, False):
+                if self.obj.properties.get(p[0], False):
                     widget.setChecked(True)
-                widget.stateChanged.connect(lambda state=0, prop=n: self.set_bool_for(state, prop))
-            elif t == "int":
+                widget.stateChanged.connect(lambda state=0, prop=p[0]: self.set_bool_for(state, prop))
+            elif p[1] == "int":
                 widget = QSpinBox()
                 widget.setMaximum(3000)
-                widget.setValue(self.obj.properties.get(n, 0))
-                widget.valueChanged.connect(lambda value=0, prop=n: self.set_int_for(value, prop))
-            elif t == "file":
+                widget.setValue(self.obj.properties.get(p[0], 0))
+                widget.valueChanged.connect(lambda value=0, prop=p[0]: self.set_int_for(value, prop))
+            elif p[1] == "file":
                 widget = QPushButton("Selectionner")
-                widget.clicked.connect(lambda checked=False, prop=n: self.set_file_for(prop))
+                widget.clicked.connect(lambda checked=False, prop=p[0]: self.set_file_for(prop))
             else:
-                raise TypeError("Unknown type for properties : "+t)
+                raise TypeError("Unknown type for properties : "+p[1])
             self.grid.addWidget(widget, nb, 1)
+            self.grid.setRowStretch(nb, 1)
 
             nb += 1
 
