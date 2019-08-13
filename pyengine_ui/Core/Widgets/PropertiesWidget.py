@@ -41,6 +41,7 @@ class PropertiesWidget(QWidget):
             elif p[1] == "int":
                 widget = QSpinBox()
                 widget.setMaximum(3000)
+                widget.setMinimum(-3000)
                 widget.setValue(self.obj.properties.get(p[0], 0))
                 widget.valueChanged.connect(lambda value=0, prop=p[0]: self.set_int_for(value, prop))
             elif p[1] == "file":
