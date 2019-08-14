@@ -20,7 +20,7 @@ class Window(QMainWindow):
         self.elementadder = QPushButton("Ajouter un élément")
         self.laffichage = Label("Affichage du Projet", 15)
 
-        self.properties = PropertiesWidget(Object("Aucun"))
+        self.properties = PropertiesWidget(self, Object("Aucun", "None"))
 
         self.setup_ui()
 

@@ -1,5 +1,6 @@
 properties = {
     "Window": [
+        ["Nom", "str", "Fenetre"],
         ["Largeur", "int", 900],
         ["Hauteur", "int", 600],
         ["Titre", "str", "PyEngine Game"],
@@ -9,6 +10,7 @@ properties = {
         ["Debug", "bool", False]
     ],
     "World": [
+        ["Nom", "str", "Monde"],
         ["Gravité X", "int", 0],
         ["Gravité Y", "int", -900]
     ]
@@ -20,10 +22,12 @@ def get_properties(element):
 
 
 class Object:
-    def __init__(self, type_):
+    def __init__(self, name, type_):
         self.properties = {k[0]: k[2] for k in get_properties(type_)}
         self.type_ = type_
+        self.name = name
+        self.childs = {}
 
-    def set_property(self, nom, value):
-        if nom in self.properties.keys():
-            self.properties[nom] = value
+    def set_property(self, name, value):
+        if name in self.properties.keys():
+            self.properties[name] = value

@@ -13,9 +13,8 @@ class Project:
     def setup_objects():
         obj = {}
 
-        window = Object("Window")
-        world = Object("World")
-        obj["Window"] = window
-        obj["World"] = world
+        window = Object("Fenetre", "Window")
+        window.childs["Monde"] = Object("Monde", "World")
+        obj["Fenetre"] = window
 
         return obj
