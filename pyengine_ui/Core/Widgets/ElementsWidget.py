@@ -28,7 +28,7 @@ class ElementsWidget(QTreeWidget):
 
     def get_item(self, text):
         try:
-            return self.findItems(text, Qt.MatchExactly)[0]
+            return self.findItems(text, Qt.MatchExactly | Qt.MatchRecursive)[0]
         except IndexError:
             return None
 

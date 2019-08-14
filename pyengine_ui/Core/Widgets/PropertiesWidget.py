@@ -71,7 +71,6 @@ class PropertiesWidget(QWidget):
         self.obj.set_property(prop, text)
         if prop == "Nom":
             element = self.parent.elements.get_item(self.obj.name)
-            print(self.obj.name, element)
             if element is not None:
                 element.setText(0, text)
                 self.obj.name = text
