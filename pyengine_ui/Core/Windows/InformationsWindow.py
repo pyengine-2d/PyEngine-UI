@@ -59,3 +59,7 @@ class InformationsWindow(QDialog):
         self.grid.addWidget(author, 6, 1)
 
         self.setLayout(self.grid)
+
+        self.setWindowFlags(Qt.CustomizeWindowHint)
+        self.setWindowFlags(Qt.WindowTitleHint)
+        self.setWindowFlags(Qt.WindowCloseButtonHint)

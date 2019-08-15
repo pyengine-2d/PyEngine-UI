@@ -55,6 +55,10 @@ class ProjectWindow(QDialog):
 
         self.setLayout(self.grid)
 
+        self.setWindowFlags(Qt.CustomizeWindowHint)
+        self.setWindowFlags(Qt.WindowTitleHint)
+        self.setWindowFlags(Qt.WindowCloseButtonHint)
+
     def get_folder(self):
         directory = self.parent.project.project_folder
         self.foldermodify = QFileDialog.\

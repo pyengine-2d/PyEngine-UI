@@ -42,6 +42,10 @@ class ThemesWindow(QDialog):
 
         self.setLayout(self.grid)
 
+        self.setWindowFlags(Qt.CustomizeWindowHint)
+        self.setWindowFlags(Qt.WindowTitleHint)
+        self.setWindowFlags(Qt.WindowCloseButtonHint)
+
     def launch(self):
         if self.listeW.currentItem():
             for i in self.liste:
