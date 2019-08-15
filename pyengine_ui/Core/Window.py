@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QVBoxLayout, QPus
 
 from pyengine_ui.Core.Utils import parsetheme, Project, Object
 from pyengine_ui.Core.Widgets import Label, ElementsWidget, PropertiesWidget
-from pyengine_ui.Core.Windows import LaunchWindow, InformationsWindow, ProjectWindow, ThemesWindow
+from pyengine_ui.Core.Windows import LaunchWindow, InformationsWindow, ProjectWindow, ThemesWindow, AddElementWindow
 
 from pyengine.Utils import Config
 
@@ -22,7 +22,8 @@ class Window(QMainWindow):
         self.grid = QGridLayout(self.centralWidget)
 
         self.elements = ElementsWidget(self)
-        self.elementadder = QPushButton("Ajouter un élément")
+        self.elementdeleter = QPushButton("Supprimer")
+        self.elementadder = QPushButton("Ajouter")
         self.laffichage = Label("Affichage du Projet", 15)
 
         self.properties = PropertiesWidget(self, Object("Aucun", "None"))
@@ -33,7 +34,8 @@ class Window(QMainWindow):
             "launch": LaunchWindow(self),
             "info": InformationsWindow(self),
             "project": ProjectWindow(self),
-            "themes": ThemesWindow(self)
+            "themes": ThemesWindow(self),
+            "add": AddElementWindow(self)
         }
 
         self.windows["launch"].show()
@@ -44,7 +46,7 @@ class Window(QMainWindow):
     def closeEvent(self, event):
         self.config.set("theme", self.theme)
         self.config.save()
-        if QMessageBox.question(self, "PyEngine - Projet", "Voulez-vous enregistrer le projet actuel?") == "yes":
+        if QMessageBox.question(self, "PyEngine - Projet", "Voulez-vous enregistrer le projet actuel?"):
             self.action_on_project("save")
         event.accept()
 
@@ -85,6 +87,11 @@ class Window(QMainWindow):
         elif type_ == "new":
             self.close()
             self.windows["launch"].show()
+        elif type_ == "deleteE":
+            if self.elements.currentItem() is not None:
+                obj = [v for k, v in self.project.all_objects().items() if k == self.elements.currentItem().text(0)][0]
+                del obj.parent.childs[obj.name]
+                self.elements.update_items()
 
     def setup_ui(self):
         project = self.menuBar().addMenu("Projet")
@@ -93,15 +100,19 @@ class Window(QMainWindow):
         project.addAction("Charger", lambda: self.action_on_project("load"))
         project.addAction("Contruire")
         project.addAction("Lancer")
-        project.addAction("Nouveau Projet", lambda : self.action_on_project("new"))
+        project.addAction("Nouveau Projet", lambda: self.action_on_project("new"))
 
         parameters = self.menuBar().addMenu("Paramètres")
         parameters.addAction("Thèmes", lambda: self.open_window("themes"))
         parameters.addAction("A Propos", lambda: self.open_window("info"))
 
-        layout_left = QVBoxLayout()
-        layout_left.addWidget(self.elements)
-        layout_left.addWidget(self.elementadder)
+        self.elementadder.clicked.connect(lambda: self.open_window("add"))
+        self.elementdeleter.clicked.connect(lambda: self.action_on_project("deleteE"))
+
+        layout_left = QGridLayout()
+        layout_left.addWidget(self.elements, 0, 0, 1, 2)
+        layout_left.addWidget(self.elementdeleter, 1, 0)
+        layout_left.addWidget(self.elementadder, 1, 1)
         self.grid.addLayout(layout_left, 0, 0)
 
         self.laffichage.setAlignment(Qt.AlignHCenter)

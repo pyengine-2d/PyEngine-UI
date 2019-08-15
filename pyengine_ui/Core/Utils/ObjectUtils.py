@@ -16,9 +16,19 @@ properties = {
     ]
 }
 
+parent = {
+    "World": ["Window"],
+}
+
+types = parent.keys()
+
 
 def get_properties(element):
     return properties.get(element, [])
+
+
+def get_parent_types(element):
+    return parent.get(element, [None])
 
 
 class Object:

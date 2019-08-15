@@ -3,6 +3,7 @@ from pyengine_ui.Core.Utils.ObjectUtils import Object
 import json
 import os
 
+
 class Project:
     def __init__(self):
         self.project_name = ""
@@ -10,6 +11,19 @@ class Project:
         self.author = "Inconnu"
         self.version = "0.0.1"
         self.objects = self.setup_objects()
+
+    def all_objects(self, element=None):
+        if element is None:
+            elements = self.objects
+        else:
+            elements = element.childs
+        if len(elements):
+            obj = elements
+            for v in elements.values():
+                obj = {**obj, **self.all_objects(v)}
+        else:
+            obj = {}
+        return obj
 
     def save(self):
         objects = {k: v.to_json() for k, v in self.objects.items()}
