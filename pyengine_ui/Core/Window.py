@@ -1,7 +1,7 @@
 import os
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QVBoxLayout, QPushButton, QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QPushButton, QFileDialog, QMessageBox
 
 from pyengine_ui.Core.Utils import parsetheme, Project, Object
 from pyengine_ui.Core.Widgets import Label, ElementsWidget, PropertiesWidget
@@ -79,7 +79,7 @@ class Window(QMainWindow):
             self.project.save()
             self.elements.update_items()
         elif type_ == "load":
-            if QMessageBox.question(self, "PyEngine - Projet", "Voulez-vous enregistrer le projet actuel?") == "yes":
+            if QMessageBox.question(self, "PyEngine - Projet", "Voulez-vous enregistrer le projet actuel?"):
                 self.action_on_project("save")
             file = QFileDialog.getOpenFileName(self, "Fichier du projet", self.project.project_folder,
                                                "Fichier Projet (*.json)")
