@@ -96,14 +96,17 @@ class Window(QMainWindow):
                 self.elements.update_items()
         elif type_ == "compile":
             self.compil.compile()
+        elif type_ == "run":
+            self.compil.compile()
+            os.system("python "+os.path.join(self.project.project_folder, self.project.project_name, "Main.py"))
 
     def setup_ui(self):
         project = self.menuBar().addMenu("Projet")
         project.addAction("Modifier", lambda: self.open_window("project"))
         project.addAction("Sauvegarder", lambda: self.action_on_project("save"))
         project.addAction("Charger", lambda: self.action_on_project("load"))
-        project.addAction("Lancer")
         project.addAction("Compiler", lambda: self.action_on_project("compile"))
+        project.addAction("Lancer", lambda: self.action_on_project("run"))
         project.addAction("Nouveau Projet", lambda: self.action_on_project("new"))
 
         parameters = self.menuBar().addMenu("Paramètres")
