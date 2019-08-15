@@ -82,6 +82,9 @@ class Window(QMainWindow):
             if file != "":
                 self.project.load(file[0])
                 self.setWindowTitle("PyEngine - "+self.project.project_name)
+        elif type_ == "new":
+            self.close()
+            self.windows["launch"].show()
 
     def setup_ui(self):
         project = self.menuBar().addMenu("Projet")
@@ -90,7 +93,7 @@ class Window(QMainWindow):
         project.addAction("Charger", lambda: self.action_on_project("load"))
         project.addAction("Contruire")
         project.addAction("Lancer")
-        project.addAction("Nouveau Projet")
+        project.addAction("Nouveau Projet", lambda : self.action_on_project("new"))
 
         parameters = self.menuBar().addMenu("Paramètres")
         parameters.addAction("Thèmes", lambda: self.open_window("themes"))
