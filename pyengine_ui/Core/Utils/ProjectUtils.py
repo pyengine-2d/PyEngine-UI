@@ -14,7 +14,10 @@ class Project:
         obj = {}
 
         window = Object("Fenetre", "Window")
-        window.childs["Monde"] = Object("Monde", "World")
+        world = Object("Monde", "World")
+        world.parent = window
+        window.childs["Monde"] = world
+
         obj["Fenetre"] = window
 
         return obj

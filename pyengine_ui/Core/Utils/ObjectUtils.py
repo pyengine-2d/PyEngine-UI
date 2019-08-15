@@ -27,6 +27,7 @@ class Object:
         self.type_ = type_
         self.name = name
         self.childs = {}
+        self.parent = None
 
     def set_property(self, name, value):
         if name in self.properties.keys():
