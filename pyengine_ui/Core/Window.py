@@ -5,13 +5,18 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QVBoxLayout, QPus
 
 from pyengine_ui.Core.Utils import parsetheme, Project, Object
 from pyengine_ui.Core.Widgets import Label, ElementsWidget, PropertiesWidget
-from pyengine_ui.Core.Windows import LaunchWindow, InformationsWindow, ProjectWindow
+from pyengine_ui.Core.Windows import LaunchWindow, InformationsWindow, ProjectWindow, ThemesWindow
 
+from pyengine.Utils import Config
 
 class Window(QMainWindow):
     def __init__(self):
         super(Window, self).__init__()
         self.project = Project()
+
+        self.config = Config("config.json")
+        if not self.config.created:
+            self.config.create({"theme": "default"})
 
         self.centralWidget = QWidget()
         self.grid = QGridLayout(self.centralWidget)
@@ -27,13 +32,19 @@ class Window(QMainWindow):
         self.windows = {
             "launch": LaunchWindow(self),
             "info": InformationsWindow(self),
-            "project" : ProjectWindow(self)
+            "project": ProjectWindow(self),
+            "themes": ThemesWindow(self)
         }
 
         self.windows["launch"].show()
 
-        self.theme = os.path.join(os.path.dirname(__file__), "..", "Themes", "default")
+        self.theme = os.path.join(os.path.dirname(__file__), "..", "Themes", self.config.get("theme"))
         self.applytheme()
+
+    def closeEvent(self, event):
+        self.config.set("theme", self.theme)
+        self.config.save()
+        event.accept()
 
     def setup_project(self):
         os.makedirs(self.project.project_folder+"/"+self.project.project_name, exist_ok=True)
@@ -66,7 +77,7 @@ class Window(QMainWindow):
         project.addAction("Nouveau Projet")
 
         parameters = self.menuBar().addMenu("Paramètres")
-        parameters.addAction("Thèmes")
+        parameters.addAction("Thèmes", lambda: self.open_window("themes"))
         parameters.addAction("A Propos", lambda: self.open_window("info"))
 
         layout_left = QVBoxLayout()
