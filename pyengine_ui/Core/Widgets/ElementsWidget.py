@@ -11,14 +11,19 @@ class ElementsWidget(QTreeWidget):
 
         self.setHeaderLabel("Elements du Projet")
 
+        self.update_items()
+
+        self.itemClicked.connect(self.clickedItem)
+
+    def update_items(self):
+        self.clear()
+
         for t, o in self.parent.project.objects.items():
             treeitem = QTreeWidgetItem([t])
             self.setup_childs(treeitem, o)
             self.addTopLevelItem(treeitem)
 
         self.expandAll()
-
-        self.itemClicked.connect(self.clickedItem)
 
     def setup_childs(self, widget, obj):
         for t, o in obj.childs.items():

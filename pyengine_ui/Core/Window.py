@@ -1,7 +1,7 @@
 import os
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QVBoxLayout, QPushButton, QFileDialog, QMessageBox
 
 from pyengine_ui.Core.Utils import parsetheme, Project, Object
 from pyengine_ui.Core.Widgets import Label, ElementsWidget, PropertiesWidget
@@ -44,15 +44,17 @@ class Window(QMainWindow):
     def closeEvent(self, event):
         self.config.set("theme", self.theme)
         self.config.save()
+        if QMessageBox.question(self, "PyEngine - Projet", "Voulez-vous enregistrer le projet actuel?") == "yes":
+            self.action_on_project("save")
         event.accept()
 
     def setup_project(self):
-        os.makedirs(self.project.project_folder+"/"+self.project.project_name, exist_ok=True)
+        directory = os.path.join(self.project.project_folder, self.project.project_name)
+        os.makedirs(directory, exist_ok=True)
         self.setWindowTitle('PyEngine - '+self.project.project_name)
-
-    def info_project(self):
-        print(self.project.project_name)
-        print(self.project.project_folder)
+        if os.path.exists(os.path.join(directory, "project.json")):
+            self.project.load(os.path.join(directory, "project.json"))
+            self.elements.update_items()
 
     def applytheme(self):
         if self.theme == "" or self.theme == os.path.join(os.path.dirname(__file__), "..", "Themes"):
@@ -68,10 +70,24 @@ class Window(QMainWindow):
         self.windows[type_].setWindowModality(Qt.ApplicationModal)
         self.windows[type_].show()
 
+    def action_on_project(self, type_):
+        if type_ == "save":
+            self.project.save()
+            self.elements.update_items()
+        elif type_ == "load":
+            if QMessageBox.question(self, "PyEngine - Projet", "Voulez-vous enregistrer le projet actuel?") == "yes":
+                self.action_on_project("save")
+            file = QFileDialog.getOpenFileName(self, "Fichier du projet", self.project.project_folder,
+                                               "Fichier Projet (*.json)")
+            if file != "":
+                self.project.load(file[0])
+                self.setWindowTitle("PyEngine - "+self.project.project_name)
+
     def setup_ui(self):
         project = self.menuBar().addMenu("Projet")
         project.addAction("Modifier", lambda: self.open_window("project"))
-        project.addAction("Sauvegarder")
+        project.addAction("Sauvegarder", lambda: self.action_on_project("save"))
+        project.addAction("Charger", lambda: self.action_on_project("load"))
         project.addAction("Contruire")
         project.addAction("Lancer")
         project.addAction("Nouveau Projet")

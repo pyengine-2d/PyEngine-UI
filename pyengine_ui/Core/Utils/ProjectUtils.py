@@ -1,5 +1,7 @@
 from pyengine_ui.Core.Utils.ObjectUtils import Object
 
+import json
+import os
 
 class Project:
     def __init__(self):
@@ -8,6 +10,22 @@ class Project:
         self.author = "Inconnu"
         self.version = "0.0.1"
         self.objects = self.setup_objects()
+
+    def save(self):
+        objects = {k: v.to_json() for k, v in self.objects.items()}
+        file = {"Name": self.project_name, "Folder": self.project_folder, "Author": self.author,
+                "Version": self.version, "Objects": objects}
+        with open(os.path.join(self.project_folder, self.project_name, "project.json"), "w") as f:
+            f.write(json.dumps(file, indent=4))
+
+    def load(self, file):
+        with open(file, "r") as f:
+            dic = json.load(f)
+        self.project_name = dic["Name"]
+        self.project_folder = dic["Folder"]
+        self.author = dic["Author"]
+        self.version = dic["Version"]
+        self.objects = {k: Object("", "").from_json(v) for k, v in dic["Objects"].items()}
 
     @staticmethod
     def setup_objects():
