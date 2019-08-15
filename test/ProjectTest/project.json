@@ -26,7 +26,42 @@
                         "Gravit\u00e9 X": 0,
                         "Gravit\u00e9 Y": -900
                     },
-                    "Childs": {}
+                    "Childs": {
+                        "Joueur": {
+                            "Type": "Entity",
+                            "Name": "Joueur",
+                            "Properties": {
+                                "Nom": "Entit\u00e9"
+                            },
+                            "Childs": {
+                                "Position": {
+                                    "Type": "PositionComponent",
+                                    "Name": "Position",
+                                    "Properties": {
+                                        "Nom": "Position",
+                                        "Position X": 0,
+                                        "Position Y": 0,
+                                        "Offset X": 0,
+                                        "Offset Y": 0
+                                    },
+                                    "Childs": {}
+                                },
+                                "Sprite": {
+                                    "Type": "SpriteComponent",
+                                    "Name": "Sprite",
+                                    "Properties": {
+                                        "Nom": "Sprite",
+                                        "Image": "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/sprite0.png",
+                                        "Scale": 1,
+                                        "Rotation": 0,
+                                        "Flip X": false,
+                                        "Flip Y": false
+                                    },
+                                    "Childs": {}
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
