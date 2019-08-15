@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QVBoxLayout, QPus
 from pyengine_ui.Core.Utils import parsetheme, Project, Object
 from pyengine_ui.Core.Widgets import Label, ElementsWidget, PropertiesWidget
 from pyengine_ui.Core.Windows import LaunchWindow, InformationsWindow, ProjectWindow, ThemesWindow, AddElementWindow
+from pyengine_ui.Core.Compilation import Compilation
 
 from pyengine.Utils import Config
 
@@ -13,6 +14,7 @@ class Window(QMainWindow):
     def __init__(self):
         super(Window, self).__init__()
         self.project = Project()
+        self.compil = Compilation(self.project)
 
         self.config = Config("config.json")
         if not self.config.created:
@@ -92,14 +94,16 @@ class Window(QMainWindow):
                 obj = [v for k, v in self.project.all_objects().items() if k == self.elements.currentItem().text(0)][0]
                 del obj.parent.childs[obj.name]
                 self.elements.update_items()
+        elif type_ == "compile":
+            self.compil.compile()
 
     def setup_ui(self):
         project = self.menuBar().addMenu("Projet")
         project.addAction("Modifier", lambda: self.open_window("project"))
         project.addAction("Sauvegarder", lambda: self.action_on_project("save"))
         project.addAction("Charger", lambda: self.action_on_project("load"))
-        project.addAction("Contruire")
         project.addAction("Lancer")
+        project.addAction("Compiler", lambda: self.action_on_project("compile"))
         project.addAction("Nouveau Projet", lambda: self.action_on_project("new"))
 
         parameters = self.menuBar().addMenu("Paramètres")
