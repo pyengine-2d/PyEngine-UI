@@ -89,6 +89,6 @@ class PropertiesWidget(QWidget):
 
     def set_file_for(self, prop):
         directory = os.environ.get('HOME', os.environ.get('USERPROFILE', os.path.dirname(__file__)))
-        self.obj.set_property(prop, QFileDialog.getOpenFileName(self, "Fichier : "+prop, directory))
+        self.obj.set_property(prop, QFileDialog.getOpenFileName(self, "Fichier : "+prop, directory)[0])
 
 
