@@ -13,11 +13,61 @@ properties = {
         ["Nom", "str", "Monde"],
         ["Gravité X", "int", 0],
         ["Gravité Y", "int", -900]
+    ],
+    "Entity": [
+        ["Nom", "str", "Entité"]
+    ],
+    "Tilemap": [
+        ["Nom", "str", "Map Tile"],
+        ["Position X", "int", 0],
+        ["Position Y", "int", 0],
+        ["Fichier JSON", "file", ""],
+        ["Scale", "int", 1]
+    ],
+    "PositionComponent": [
+        ["Nom", "str", "Position"],
+        ["Position X", "int", 0],
+        ["Position Y", "int", 0],
+        ["Offset X", "int", 0],
+        ["Offset Y", "int", 0]
+    ],
+    "SpriteComponent": [
+        ["Nom", "str", "Sprite"],
+        ["Image", "file", ""],
+        ["Scale", "int", 1],
+        ["Rotation", "int", 0],
+        ["Flip X", "bool", False],
+        ["Flip Y", "bool", False]
+    ],
+    "TextComponent": [
+        ["Nom", "str", "Texte"],
+        ["Texte", "str", ""],
+        ["Scale", "int", 0]
+    ],
+    "PhysicsComponent": [
+        ["Nom", "str", "Physique"],
+        ["Affecté par Gravité", "bool", True],
+        ["Friction", "int", 0],
+        ["Elasticité", "int", 0],
+        ["Masse", "int", 0],
+        ["Solide", "bool", True]
+    ],
+    "MoveComponent": [
+        ["Nom", "str", "Mouvement"],
+        ["Direction X", "int", 0],
+        ["Direction Y", "int", 0]
     ]
 }
 
 parent = {
     "World": ["Window"],
+    "Entity": ["World"],
+    "Tilemap": ["Tilemap"],
+    "PositionComponent": ["Entity"],
+    "SpriteComponent": ["Entity"],
+    "TextComponent": ["Entity"],
+    "PhysicsComponent": ["Entity"],
+    "MoveComponent": ["Entity"]
 }
 
 types = parent.keys()
