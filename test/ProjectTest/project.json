@@ -11,7 +11,7 @@
                 "Nom": "Fenetre",
                 "Largeur": 900,
                 "Hauteur": 600,
-                "Titre": "PyEngine Window",
+                "Titre": "PyEngine Game",
                 "Icon": "",
                 "FPS Max": 0,
                 "Update /s": 60,
@@ -39,8 +39,8 @@
                                     "Name": "Position",
                                     "Properties": {
                                         "Nom": "Position",
-                                        "Position X": 0,
-                                        "Position Y": 0,
+                                        "Position X": 200,
+                                        "Position Y": 100,
                                         "Offset X": 0,
                                         "Offset Y": 0
                                     },
