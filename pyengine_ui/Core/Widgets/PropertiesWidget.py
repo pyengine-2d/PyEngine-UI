@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QSpacerItem, QLineEdit, QCheck
 
 from pyengine_ui.Core.Utils import get_properties
 from pyengine_ui.Core.Widgets import Label
+from pyengine_ui.Core.ScriptEditor import Editor
 
 
 class PropertiesWidget(QWidget):
@@ -28,7 +29,6 @@ class PropertiesWidget(QWidget):
             label = Label(p[0], 12)
             label.setMaximumHeight(50)
             label.setMinimumHeight(50)
-            label.setAlignment(Qt.AlignCenter)
             self.grid.addWidget(label, nb, 0)
 
             if p[1] == "str":
@@ -60,6 +60,7 @@ class PropertiesWidget(QWidget):
             nb += 1
 
         scripting = QPushButton("Modifier Script")
+        scripting.clicked.connect(self.edit_script)
         self.grid.addWidget(scripting, nb, 0, 1, 2)
 
         end_spacer = QSpacerItem(20, 20, QSizePolicy.Preferred, QSizePolicy.Expanding)
@@ -69,6 +70,11 @@ class PropertiesWidget(QWidget):
             self.grid.setColumnStretch(i, 1)
 
         self.setLayout(self.grid)
+
+    def edit_script(self):
+        if self.obj.type_ != "None":
+            self.parent.editor = Editor(self.parent, self.obj)
+            self.parent.editor.show()
 
     def set_text_for(self, text, prop):
         self.obj.set_property(prop, text)

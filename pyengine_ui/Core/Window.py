@@ -7,8 +7,10 @@ from pyengine_ui.Core.Utils import parsetheme, Project, Object
 from pyengine_ui.Core.Widgets import Label, ElementsWidget, PropertiesWidget
 from pyengine_ui.Core.Windows import LaunchWindow, InformationsWindow, ProjectWindow, ThemesWindow, AddElementWindow
 from pyengine_ui.Core.Compilation import Compilation
+from pyengine_ui.Core.ScriptEditor import Editor
 
 from pyengine.Utils import Config
+
 
 class Window(QMainWindow):
     def __init__(self):
@@ -39,6 +41,8 @@ class Window(QMainWindow):
             "themes": ThemesWindow(self),
             "add": AddElementWindow(self)
         }
+
+        self.editor = Editor(self, Object("Aucun", "None"))
 
         self.windows["launch"].show()
 

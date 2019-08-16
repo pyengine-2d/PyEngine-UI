@@ -88,6 +88,7 @@ class Object:
         self.name = name
         self.childs = {}
         self.parent = None
+        self.script = ""
 
     def set_property(self, name, value):
         if name in self.properties.keys():
