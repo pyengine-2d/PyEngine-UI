@@ -53,6 +53,8 @@ class Compilation:
         text += "class "+pos.name+"(PositionComponent):\n"
         text += "    def __init__(self):\n"
         text += "        super("+pos.name+", self).__init__(Vec2("+pos_x+", "+pos_y+"), Vec2("+off_x+", "+off_y+"))\n"
+        for i in pos.script.split("\n"):
+            text += "    "+i+"\n"
         return text
 
     def sprite_class(self, sprite):
@@ -73,6 +75,8 @@ class Compilation:
         text += "class "+sprite.name+"(SpriteComponent):\n"
         text += "    def __init__(self):\n"
         text += "        super("+sprite.name+', self).__init__("'+image+'", '+scale+", "+rot+", "+flipx+", "+flipy+")\n"
+        for i in sprite.script.split("\n"):
+            text += "    "+i+"\n"
         return text
 
     def physics_class(self, phys):
@@ -86,6 +90,8 @@ class Compilation:
         text += "class "+phys.name+"(PhysicsComponent):\n"
         text += "    def __init__(self):\n"
         text += "        super("+phys.name+", self).__init__("+agravity+", "+fric+", "+elas+", "+mass+", "+solid+")\n"
+        for i in phys.script.split("\n"):
+            text += "    "+i+"\n"
         return text
 
     def move_class(self, move):
@@ -96,6 +102,8 @@ class Compilation:
         text += "class "+move.name+"(MoveComponent):\n"
         text += "    def __init__(self):\n"
         text += "        super("+move.name+", self).__init__(Vec2("+dirx+", "+diry+"))\n"
+        for i in move.script.split("\n"):
+            text += "    "+i+"\n"
         return text
 
     def text_class(self, txt):
@@ -106,6 +114,8 @@ class Compilation:
         text += "class "+txt.name+"(TexteComponent):\n"
         text += "    def __init__(self):\n"
         text += "        super("+txt.name+', self).__init__("'+texte+'", scale='+scale+")\n"
+        for i in txt.script.split("\n"):
+            text += "    "+i+"\n"
         return text
 
     def tilemap_class(self, tilemap):
@@ -131,6 +141,8 @@ class Compilation:
         if len(tilemap.childs.values()):
             for i in tilemap.childs.values():
                 text += "        self.add_component("+i.name+"())\n"
+        for i in tilemap.script.split("\n"):
+            text += "    "+i+"\n"
         return text
 
     def entity_class(self, entity):
@@ -144,6 +156,8 @@ class Compilation:
         if len(entity.childs.values()):
             for i in entity.childs.values():
                 text += "        self.add_component("+i.name+"())\n"
+        for i in entity.script.split("\n"):
+            text += "    "+i+"\n"
         return text
 
     def world_class(self, world):
@@ -162,6 +176,8 @@ class Compilation:
             text += "        self.esys = self.get_system(EntitySystem)\n"
             for i in world.childs.values():
                 text += "        self.esys.add_entity("+i.name+"())\n"
+        for i in world.script.split("\n"):
+            text += "    "+i+"\n"
         return text
 
     def window_class(self, window):
@@ -200,6 +216,8 @@ class Compilation:
             for i in window.childs.values():
                 text += "        self."+i.name.lower()+" = "+i.name+"(self)\n"
             text += "        self.world = self."+i.name.lower()+"\n"
+        for i in window.script.split("\n"):
+            text += "    "+i+"\n"
         text += "        self.run()\n\n\n"
         text += window.name+"()"
         return text

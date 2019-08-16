@@ -59,8 +59,11 @@ class PropertiesWidget(QWidget):
 
             nb += 1
 
+        scripting = QPushButton("Modifier Script")
+        self.grid.addWidget(scripting, nb, 0, 1, 2)
+
         end_spacer = QSpacerItem(20, 20, QSizePolicy.Preferred, QSizePolicy.Expanding)
-        self.grid.addItem(end_spacer, nb, 0)
+        self.grid.addItem(end_spacer, nb+1, 0)
 
         for i in range(0, 2):
             self.grid.setColumnStretch(i, 1)
