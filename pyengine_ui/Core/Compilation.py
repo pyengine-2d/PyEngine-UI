@@ -1,4 +1,5 @@
 import os
+import shutil
 
 
 class Compilation:
@@ -61,6 +62,13 @@ class Compilation:
         flipx = str(sprite.properties["Flip X"])
         flipy = str(sprite.properties["Flip Y"])
 
+        if image != "":
+            directory = os.path.join(self.project.project_folder, self.project.project_name)
+            os.makedirs(os.path.join(directory, "Images"), exist_ok=True)
+            filename = os.path.basename(image)
+            shutil.copyfile(image, os.path.join(directory, "Images", filename))
+            image = "Images/"+filename
+
         text = "from pyengine.Components import SpriteComponent\n\n\n"
         text += "class "+sprite.name+"(SpriteComponent):\n"
         text += "    def __init__(self):\n"
@@ -105,6 +113,13 @@ class Compilation:
         pos_y = str(tilemap.properties["Position Y"])
         file = str(tilemap.properties["Fichier JSON"])
         scale = str(tilemap.properties["Scale"])
+
+        if file != "":
+            directory = os.path.join(self.project.project_folder, self.project.project_name)
+            os.makedirs(os.path.join(directory, "JSON"), exist_ok=True)
+            filename = os.path.basename(file)
+            shutil.copyfile(file, os.path.join(directory, "JSON", filename))
+            file = "JSON/"+filename
 
         text = "from pyengine.Entities import Tilemap\nfrom pyengine.Utils import Vec2\n"
         if len(tilemap.childs.values()):
@@ -160,6 +175,13 @@ class Compilation:
             fps = str(window.properties["FPS Max"])
         update = str(window.properties["Update /s"])
         debug = str(window.properties["Debug"])
+
+        if icon != "":
+            directory = os.path.join(self.project.project_folder, self.project.project_name)
+            os.makedirs(os.path.join(directory, "Images"), exist_ok=True)
+            filename = os.path.basename(icon)
+            shutil.copyfile(icon, os.path.join(directory, "Images", filename))
+            icon = "Images/"+filename
 
         text = "from pyengine import Window\n"
         if len(window.childs.values()):

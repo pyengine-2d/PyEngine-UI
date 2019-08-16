@@ -98,6 +98,7 @@ class Window(QMainWindow):
             self.compil.compile()
         elif type_ == "run":
             self.compil.compile()
+            os.chdir(os.path.join(self.project.project_folder, self.project.project_name))
             os.system("python "+os.path.join(self.project.project_folder, self.project.project_name, "Main.py"))
 
     def setup_ui(self):
