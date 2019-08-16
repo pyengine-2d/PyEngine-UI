@@ -3,6 +3,7 @@ from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QColor, QTextFormat, QPainter
 
 from pyengine_ui.Core.ScriptEditor.LineAreaWidget import LineAreaWidget
+from pyengine_ui.Core.ScriptEditor.Highlighter import Highlighter
 
 
 class EditorWidget(QPlainTextEdit):
@@ -10,6 +11,7 @@ class EditorWidget(QPlainTextEdit):
         super(EditorWidget, self).__init__(parent)
         self.parent = parent
         self.linearea = LineAreaWidget(self)
+        self.highlighter = Highlighter(self.document())
 
         self.blockCountChanged.connect(self.update_linearea_width)
         self.updateRequest.connect(self.update_linearea)

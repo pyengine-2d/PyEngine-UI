@@ -35,7 +35,7 @@
                             "Properties": {
                                 "Nom": "Joueur"
                             },
-                            "Script": "    print(\"INTIALISATION \u00e0\u00e9 ;) \")",
+                            "Script": "    print(\"INTIALISATION \u00e0\u00e9 ;) \")\n    \"\"\" COMMENTAIRE\n    MULTILINE\"\"\"\n    # Commentaire one line",
                             "Childs": {
                                 "Position": {
                                     "Type": "PositionComponent",

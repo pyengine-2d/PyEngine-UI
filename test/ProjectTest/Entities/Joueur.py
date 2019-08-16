@@ -9,3 +9,6 @@ class Joueur(Entity):
         self.add_component(Position())
         self.add_component(Sprite())
         print("INTIALISATION àé ;) ")
+        """ COMMENTAIRE
+        MULTILINE"""
+        # Commentaire one line
