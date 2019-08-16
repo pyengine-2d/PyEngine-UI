@@ -74,7 +74,7 @@ class PropertiesWidget(QWidget):
     def edit_script(self):
         if self.obj.type_ != "None":
             self.parent.editor = Editor(self.parent, self.obj)
-            self.parent.editor.show()
+            self.parent.editor.showMaximized()
 
     def set_text_for(self, text, prop):
         self.obj.set_property(prop, text)
