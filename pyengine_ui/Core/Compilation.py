@@ -11,7 +11,7 @@ class Compilation:
         for i in self.project.all_objects().values():
             if "Component" in i.type_:
                 os.makedirs(os.path.join(directory, "Components"), exist_ok=True)
-                with open(os.path.join(directory, "Components", i.name.capitalize()+".py"), "w") as f:
+                with open(os.path.join(directory, "Components", i.name.capitalize()+".py"), "w", encoding="utf-8") as f:
                     if i.type_ == "PositionComponent":
                         f.write(self.position_class(i))
                     elif i.type_ == "SpriteComponent":
@@ -25,7 +25,7 @@ class Compilation:
                 print(i.name+" a été compilé avec succès")
             elif i.type_ in ["Entity", "Tilemap"]:
                 os.makedirs(os.path.join(directory, "Entities"), exist_ok=True)
-                with open(os.path.join(directory, "Entities", i.name.capitalize()+".py"), "w") as f:
+                with open(os.path.join(directory, "Entities", i.name.capitalize()+".py"), "w", encoding="utf-8") as f:
                     if i.type_ == "Entity":
                         f.write(self.entity_class(i))
                     else:
@@ -33,11 +33,11 @@ class Compilation:
                 print(i.name+" a été compilé avec succès")
             elif i.type_ == "World":
                 os.makedirs(os.path.join(directory, "Worlds"), exist_ok=True)
-                with open(os.path.join(directory, "Worlds", i.name.capitalize()+".py"), "w") as f:
+                with open(os.path.join(directory, "Worlds", i.name.capitalize()+".py"), "w", encoding="utf-8") as f:
                     f.write(self.world_class(i))
                 print(i.name+" a été compilé avec succès")
             elif i.type_ == "Window":
-                with open(os.path.join(directory, "Main.py"), "w") as f:
+                with open(os.path.join(directory, "Main.py"), "w", encoding="utf-8") as f:
                     f.write(self.window_class(i))
                 print(i.name+" a été compilé avec succès.")
             else:

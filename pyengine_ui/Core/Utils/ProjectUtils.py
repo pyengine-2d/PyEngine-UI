@@ -33,7 +33,7 @@ class Project:
             f.write(json.dumps(file, indent=4))
 
     def load(self, file):
-        with open(file, "r") as f:
+        with open(file, "r", encoding="utf-8") as f:
             dic = json.load(f)
         self.project_name = dic["Name"]
         self.project_folder = dic["Folder"]

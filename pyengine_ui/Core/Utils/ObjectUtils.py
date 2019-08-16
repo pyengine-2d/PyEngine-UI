@@ -15,7 +15,7 @@ properties = {
         ["Gravité Y", "int", -900]
     ],
     "Entity": [
-        ["Nom", "str", "Entité"]
+        ["Nom", "str", "Entite"]
     ],
     "Tilemap": [
         ["Nom", "str", "Map Tile"],

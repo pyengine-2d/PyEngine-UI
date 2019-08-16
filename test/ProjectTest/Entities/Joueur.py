@@ -8,5 +8,4 @@ class Joueur(Entity):
         super(Joueur, self).__init__()
         self.add_component(Position())
         self.add_component(Sprite())
-    print('test')
-    print('Génial !')
+        print("INTIALISATION àé ;) ")

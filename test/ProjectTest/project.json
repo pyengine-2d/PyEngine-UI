@@ -33,9 +33,9 @@
                             "Type": "Entity",
                             "Name": "Joueur",
                             "Properties": {
-                                "Nom": "Entit\u00e9"
+                                "Nom": "Joueur"
                             },
-                            "Script": "print('test')\nprint('G\u00c3\u00a9nial !')",
+                            "Script": "    print(\"INTIALISATION \u00e0\u00e9 ;) \")",
                             "Childs": {
                                 "Position": {
                                     "Type": "PositionComponent",
