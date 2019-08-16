@@ -83,7 +83,8 @@ class Window(QMainWindow):
             self.project.save()
             self.elements.update_items()
         elif type_ == "load":
-            if QMessageBox.question(self, "PyEngine - Projet", "Voulez-vous enregistrer le projet actuel?"):
+            if QMessageBox.question(self, "PyEngine - Projet",
+                                    "Voulez-vous enregistrer le projet actuel?") == QMessageBox.Yes:
                 self.action_on_project("save")
             file = QFileDialog.getOpenFileName(self, "Fichier du projet", self.project.project_folder,
                                                "Fichier Projet (*.json)")
