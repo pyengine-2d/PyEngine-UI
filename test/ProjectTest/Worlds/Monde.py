@@ -8,3 +8,4 @@ class Monde(World):
         super(Monde, self).__init__(window, [0, -900])
         self.esys = self.get_system(EntitySystem)
         self.esys.add_entity(Joueur())
+    
