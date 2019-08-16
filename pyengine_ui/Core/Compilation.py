@@ -8,6 +8,8 @@ class Compilation:
 
     def compile(self):
         directory = os.path.join(self.project.project_folder, self.project.project_name)
+        self.clear_files(directory)
+
         for i in self.project.all_objects().values():
             if "Component" in i.type_:
                 os.makedirs(os.path.join(directory, "Components"), exist_ok=True)
@@ -221,3 +223,12 @@ class Compilation:
         text += "        self.run()\n\n\n"
         text += window.name+"()"
         return text
+
+    @staticmethod
+    def clear_files(directory):
+        for folder in ["Components", "Images", "Entities", "Worlds"]:
+            if os.path.exists(os.path.join(directory, folder)):
+                [os.remove(os.path.join(directory, folder, i)) for i in os.listdir(os.path.join(directory, folder))
+                 if ".py" in i]
+        if os.path.exists(os.path.join(directory, "Main.py")):
+            os.remove(os.path.join(directory, "Main.py"))
