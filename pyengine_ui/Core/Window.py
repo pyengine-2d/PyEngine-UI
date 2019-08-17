@@ -42,12 +42,14 @@ class Window(QMainWindow):
             "add": AddElementWindow(self)
         }
 
-        self.editor = Editor(self, Object("Aucun", "None"))
-
-        self.windows["launch"].show()
+        self.editor = None
 
         self.theme = os.path.join(os.path.dirname(__file__), "..", "Themes", self.config.get("theme"))
         self.applytheme()
+
+        self.editor = Editor(self, Object("Aucun", "None"))
+
+        self.windows["launch"].show()
 
     def closeEvent(self, event):
         self.config.set("theme", self.theme)
@@ -72,6 +74,9 @@ class Window(QMainWindow):
             self.setStyleSheet(pss)
             for i in self.windows.values():
                 i.setStyleSheet(pss)
+            if self.editor is not None:
+                self.editor.editor.highlighter.update_styles()
+                self.editor.editor.highlighter.update_rules()
 
     def open_window(self, type_):
         self.windows[type_].update()

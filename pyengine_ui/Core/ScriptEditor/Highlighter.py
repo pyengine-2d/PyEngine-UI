@@ -1,5 +1,8 @@
-from PyQt5.QtGui import QSyntaxHighlighter, QTextCharFormat, QFont
-from PyQt5.QtCore import Qt, QRegularExpression, QRegExp
+from PyQt5.QtGui import QSyntaxHighlighter, QTextCharFormat, QFont, QColor
+from PyQt5.QtCore import QRegularExpression, QRegExp
+
+import os
+import json
 
 
 def text_format(color, style=''):
@@ -12,17 +15,6 @@ def text_format(color, style=''):
     return f
 
 
-styles = {
-    'keyword': text_format(Qt.blue),
-    'operator': text_format(Qt.red),
-    'brace': text_format(Qt.darkGray),
-    'defclass': text_format(Qt.black, 'bold'),
-    'string': text_format(Qt.magenta),
-    'string2': text_format(Qt.darkMagenta),
-    'comment': text_format(Qt.darkGreen, 'italic'),
-    'self': text_format(Qt.black, 'italic'),
-    'numbers': text_format(Qt.green),
-}
 keywords = [
     'and', 'assert', 'break', 'class', 'continue', 'def',
     'del', 'elif', 'else', 'except', 'exec', 'finally',
@@ -50,38 +42,16 @@ braces = [
 
 
 class Highlighter(QSyntaxHighlighter):
-    def __init__(self, parent):
-        super(Highlighter, self).__init__(parent)
+    def __init__(self, parent, doc):
+        super(Highlighter, self).__init__(doc)
+        self.main = parent.parent.parent
+        self.parent = parent
+        self.styles = {}
+        self.update_styles()
         self.rules = []
-
-        self.rules += [(r'\b%s\b' % w, 0, styles['keyword'])
-                       for w in keywords]
-        self.rules += [(r'%s' % o, 0, styles['operator'])
-                       for o in operators]
-        self.rules += [(r'%s' % b, 0, styles['brace'])
-                       for b in braces]
-
-        self.rules += [
-            (r'\bself\b', 0, styles['self']),
-
-            (r'"[^"\\]*(\\.[^"\\]*)*"', 0, styles['string']),
-            (r"'[^'\\]*(\\.[^'\\]*)*'", 0, styles['string']),
-
-            (r'\bdef\b\s*(\w+)', 1, styles['defclass']),
-            # 'class' followed by an identifier
-            (r'\bclass\b\s*(\w+)', 1, styles['defclass']),
-
-            (r'#[^\n]*', 0, styles['comment']),
-
-            (r'\b[+-]?[0-9]+[lL]?\b', 0, styles['numbers']),
-            (r'\b[+-]?0[xX][0-9A-Fa-f]+[lL]?\b', 0, styles['numbers']),
-            (r'\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b', 0, styles['numbers']),
-        ]
-
-
-        self.rules = [(QRegularExpression(pat), index, fmt) for (pat, index, fmt) in self.rules]
-        self.tri_single = (QRegExp("'''"), 1, styles['string2'])
-        self.tri_double = (QRegExp('"""'), 2, styles['string2'])
+        self.tri_double = []
+        self.tri_single = []
+        self.update_rules()
 
     def highlightBlock(self, text):
         for exp, nth, style in self.rules:
@@ -118,3 +88,45 @@ class Highlighter(QSyntaxHighlighter):
             return True
         else:
             return False
+
+    def update_rules(self):
+        self.rules = []
+
+        self.rules += [(r'\b%s\b' % w, 0, self.styles['keyword'])
+                       for w in keywords]
+        self.rules += [(r'%s' % o, 0, self.styles['operator'])
+                       for o in operators]
+        self.rules += [(r'%s' % b, 0, self.styles['brace'])
+                       for b in braces]
+
+        self.rules += [
+            (r'\bself\b', 0, self.styles['self']),
+
+            (r'"[^"\\]*(\\.[^"\\]*)*"', 0, self.styles['string']),
+            (r"'[^'\\]*(\\.[^'\\]*)*'", 0, self.styles['string']),
+
+            (r'\bdef\b\s*(\w+)', 1, self.styles['defclass']),
+            # 'class' followed by an identifier
+            (r'\bclass\b\s*(\w+)', 1, self.styles['defclass']),
+
+            (r'#[^\n]*', 0, self.styles['comment']),
+
+            (r'\b[+-]?[0-9]+[lL]?\b', 0, self.styles['numbers']),
+            (r'\b[+-]?0[xX][0-9A-Fa-f]+[lL]?\b', 0, self.styles['numbers']),
+            (r'\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b', 0, self.styles['numbers']),
+        ]
+
+        self.rules = [(QRegularExpression(pat), index, fmt) for (pat, index, fmt) in self.rules]
+        self.tri_single = (QRegExp("'''"), 1, self.styles['string2'])
+        self.tri_double = (QRegExp('"""'), 2, self.styles['string2'])
+
+    def update_styles(self):
+        with open(os.path.join(self.main.theme, "highlighter.json"), 'r') as f:
+            dic = json.load(f)
+
+        self.styles = dic["styles"]
+        for k, v in self.styles.items():
+            if len(v) == 3:
+                self.styles[k] = text_format(QColor(v[0], v[1], v[2]))
+            else:
+                self.styles[k] = text_format(QColor(v[0], v[1], v[2]), v[3])

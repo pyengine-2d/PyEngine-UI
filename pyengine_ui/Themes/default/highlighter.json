@@ -1,0 +1,13 @@
+{
+    "styles": {
+        "keyword": [0, 0, 255],
+        "operator": [255, 0, 0],
+        "brace": [128, 128, 128],
+        "defclass": [0, 0, 0, "bold"],
+        "string": [0, 255, 0],
+        "string2": [0, 128, 0],
+        "comment": [0, 128, 0, "italic"],
+        "self": [0, 0, 0, "italic"],
+        "numbers": [255, 0, 255]
+    }
+}
