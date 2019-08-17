@@ -55,6 +55,10 @@ class Compilation:
         text += "class "+pos.name+"(PositionComponent):\n"
         text += "    def __init__(self):\n"
         text += "        super("+pos.name+", self).__init__(Vec2("+pos_x+", "+pos_y+"), Vec2("+off_x+", "+off_y+"))\n"
+        text += "        try:\n"
+        text += "            self.init()\n"
+        text += "        except AttributeError:\n"
+        text += "            pass\n"
         for i in pos.script.split("\n"):
             text += "    "+i+"\n"
         return text
@@ -77,6 +81,10 @@ class Compilation:
         text += "class "+sprite.name+"(SpriteComponent):\n"
         text += "    def __init__(self):\n"
         text += "        super("+sprite.name+', self).__init__("'+image+'", '+scale+", "+rot+", "+flipx+", "+flipy+")\n"
+        text += "        try:\n"
+        text += "            self.init()\n"
+        text += "        except AttributeError:\n"
+        text += "            pass\n"
         for i in sprite.script.split("\n"):
             text += "    "+i+"\n"
         return text
@@ -92,6 +100,10 @@ class Compilation:
         text += "class "+phys.name+"(PhysicsComponent):\n"
         text += "    def __init__(self):\n"
         text += "        super("+phys.name+", self).__init__("+agravity+", "+fric+", "+elas+", "+mass+", "+solid+")\n"
+        text += "        try:\n"
+        text += "            self.init()\n"
+        text += "        except AttributeError:\n"
+        text += "            pass\n"
         for i in phys.script.split("\n"):
             text += "    "+i+"\n"
         return text
@@ -116,6 +128,10 @@ class Compilation:
         text += "class "+txt.name+"(TexteComponent):\n"
         text += "    def __init__(self):\n"
         text += "        super("+txt.name+', self).__init__("'+texte+'", scale='+scale+")\n"
+        text += "        try:\n"
+        text += "            self.init()\n"
+        text += "        except AttributeError:\n"
+        text += "            pass\n"
         for i in txt.script.split("\n"):
             text += "    "+i+"\n"
         return text
@@ -140,6 +156,10 @@ class Compilation:
         text += "\n\nclass "+tilemap.name+"(Tilemap):\n"
         text += "    def __init__(self):\n"
         text += "        super("+tilemap.name+", self).__init__(Vec2("+pos_x+", "+pos_y+"), "+file+", "+scale+")\n"
+        text += "        try:\n"
+        text += "            self.init()\n"
+        text += "        except AttributeError:\n"
+        text += "            pass\n"
         if len(tilemap.childs.values()):
             for i in tilemap.childs.values():
                 text += "        self.add_component("+i.name+"())\n"
@@ -155,6 +175,10 @@ class Compilation:
         text += "\n\nclass "+entity.name+"(Entity):\n"
         text += "    def __init__(self):\n"
         text += "        super("+entity.name+", self).__init__()\n"
+        text += "        try:\n"
+        text += "            self.init()\n"
+        text += "        except AttributeError:\n"
+        text += "            pass\n"
         if len(entity.childs.values()):
             for i in entity.childs.values():
                 text += "        self.add_component("+i.name+"())\n"
@@ -174,6 +198,10 @@ class Compilation:
         text += "\n\nclass "+world.name+"(World):\n"
         text += "    def __init__(self, window):\n"
         text += "        super("+world.name+", self).__init__(window, ["+gravity_x+", "+gravity_y+"])\n"
+        text += "        try:\n"
+        text += "            self.init()\n"
+        text += "        except AttributeError:\n"
+        text += "            pass\n"
         if len(world.childs.values()):
             text += "        self.esys = self.get_system(EntitySystem)\n"
             for i in world.childs.values():
@@ -208,6 +236,10 @@ class Compilation:
         text += "\n\nclass "+window.name+"(Window):\n"
         text += "    def __init__(self):\n"
         text += "        super("+window.name+", self).__init__("+largeur+", "+hauteur
+        text += "        try:\n"
+        text += "            self.init()\n"
+        text += "        except AttributeError:\n"
+        text += "            pass\n"
         if titre != "":
             text += ', title="'+titre+'"'
         if icon != "":
