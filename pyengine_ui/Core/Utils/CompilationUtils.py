@@ -2,6 +2,23 @@ import os
 import shutil
 
 
+def control_class(compil, con):
+    type_ = str(con.properties["Type de Controle"])
+    speed = str(con.properties["Vitesse"])
+
+    text = "from pyengine.Components import ControlComponent\nfrom pyengine import ControlType\n\n\n"
+    text += "class " + con.name + "(ControlComponent):\n"
+    text += "    def __init__(self):\n"
+    text += "        super(" + con.name + ", self).__init__(ControlType." + type_ + ", " + speed + ")\n"
+    text += "        try:\n"
+    text += "            self.init()\n"
+    text += "        except AttributeError:\n"
+    text += "            pass\n"
+    if con.script != "":
+        for i in con.script.split("\n"):
+            text += "    " + i + "\n"
+    return text
+
 def position_class(compil, pos):
     pos_x = str(pos.properties["Position X"])
     pos_y = str(pos.properties["Position Y"])

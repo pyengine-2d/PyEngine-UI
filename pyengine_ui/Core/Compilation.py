@@ -4,6 +4,8 @@ from pyengine_ui.Core.Utils.CompilationUtils import *
 class Compilation:
     def __init__(self, project):
         self.project = project
+        self.class_function = {
+            "ControlComponent": control_class,
             "PositionComponent": position_class,
             "SpriteComponent": sprite_class,
             "TextComponent": text_class,

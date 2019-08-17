@@ -57,6 +57,12 @@ properties = {
         ["Nom", "str", "Mouvement"],
         ["Direction X", "int", 0],
         ["Direction Y", "int", 0]
+    ],
+    "ControlComponent": [
+        ["Nom", "str", "Controle"],
+        ["Type de Controle", "list|FOURDIRECTION, CLASSICJUMP, DOUBLEJUMP, CLICKFOLLOW, LEFTRIGHT, UPDOWN, MOUSEFOLLOW",
+         "FOURDIRECTION"],
+        ["Vitesse", "int", 250]
     ]
 }
 
@@ -68,7 +74,8 @@ parent = {
     "SpriteComponent": ["Entity"],
     "TextComponent": ["Entity"],
     "PhysicsComponent": ["Entity"],
-    "MoveComponent": ["Entity"]
+    "MoveComponent": ["Entity"],
+    "ControlComponent": ["Entity"]
 }
 
 types = parent.keys()
