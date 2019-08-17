@@ -2,7 +2,8 @@ import os
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QGridLayout, QSpacerItem, QLineEdit, QCheckBox, QSpinBox, QPushButton, \
-    QFileDialog, QSizePolicy
+    QFileDialog, QSizePolicy, QComboBox, QColorDialog
+from PyQt5.QtGui import QColor
 
 from pyengine_ui.Core.Utils import get_properties
 from pyengine_ui.Core.Widgets import Label
@@ -49,6 +50,15 @@ class PropertiesWidget(QWidget):
                 widget.setMinimum(-3000)
                 widget.setValue(self.obj.properties.get(p[0], 0))
                 widget.valueChanged.connect(lambda value=0, prop=p[0]: self.set_int_for(value, prop))
+            elif "|" in p[1] and p[1].split("|")[0] == "list":
+                widget = QComboBox()
+                for i in p[1].split("|")[1].split(", "):
+                    widget.addItem(i)
+                widget.setCurrentText(self.obj.properties.get(p[0], p[1].split("|")[1].split(", ")[0]))
+                widget.currentTextChanged.connect(lambda value="", prop=p[0]: self.set_text_for(value, prop))
+            elif p[1] == "color":
+                widget = QPushButton("Selectionner")
+                widget.clicked.connect(lambda checked=False, prop=p[0]: self.set_color_for(prop))
             elif p[1] == "file":
                 widget = QPushButton("Selectionner")
                 widget.clicked.connect(lambda checked=False, prop=p[0]: self.set_file_for(prop))
@@ -99,5 +109,9 @@ class PropertiesWidget(QWidget):
     def set_file_for(self, prop):
         directory = os.environ.get('HOME', os.environ.get('USERPROFILE', os.path.dirname(__file__)))
         self.obj.set_property(prop, QFileDialog.getOpenFileName(self, "Fichier : "+prop, directory)[0])
+
+    def set_color_for(self, prop):
+        qcolor = QColorDialog.getColor(QColor(*self.obj.properties[prop]))
+        self.obj.set_property(prop, qcolor.getRgb())
 
 
