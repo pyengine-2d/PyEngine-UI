@@ -63,6 +63,17 @@
                                     },
                                     "Script": "",
                                     "Childs": {}
+                                },
+                                "Controle": {
+                                    "Type": "ControlComponent",
+                                    "Name": "Controle",
+                                    "Properties": {
+                                        "Nom": "Controle",
+                                        "Type de Controle": "FOURDIRECTION",
+                                        "Vitesse": 10
+                                    },
+                                    "Script": "",
+                                    "Childs": {}
                                 }
                             }
                         }
