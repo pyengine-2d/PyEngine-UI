@@ -15,6 +15,7 @@ def control_class(compil, con):
     text += "        except AttributeError:\n"
     text += "            pass\n"
     if con.script != "":
+        text += "    \n"
         for i in con.script.split("\n"):
             text += "    " + i + "\n"
     return text
@@ -35,6 +36,7 @@ def position_class(compil, pos):
     text += "        except AttributeError:\n"
     text += "            pass\n"
     if pos.script != "":
+        text += "    \n"
         for i in pos.script.split("\n"):
             text += "    " + i + "\n"
     return text
@@ -64,6 +66,7 @@ def sprite_class(compil, sprite):
     text += "        except AttributeError:\n"
     text += "            pass\n"
     if sprite.script != "":
+        text += "    \n"
         for i in sprite.script.split("\n"):
             text += "    " + i + "\n"
     return text
@@ -86,6 +89,7 @@ def physics_class(compil, phys):
     text += "        except AttributeError:\n"
     text += "            pass\n"
     if phys.script != "":
+        text += "    \n"
         for i in phys.script.split("\n"):
             text += "    " + i + "\n"
     return text
@@ -99,8 +103,10 @@ def move_class(compil, move):
     text += "class " + move.name + "(MoveComponent):\n"
     text += "    def __init__(self):\n"
     text += "        super(" + move.name + ", self).__init__(Vec2(" + dirx + ", " + diry + "))\n"
-    for i in move.script.split("\n"):
-        text += "    " + i + "\n"
+    if move.script != "":
+        text += "    \n"
+        for i in move.script.split("\n"):
+            text += "    " + i + "\n"
     return text
 
 
@@ -119,6 +125,7 @@ def text_class(compil, txt):
     text += "        except AttributeError:\n"
     text += "            pass\n"
     if txt.script != "":
+        text += "    \n"
         for i in txt.script.split("\n"):
             text += "    " + i + "\n"
     return text
@@ -153,6 +160,7 @@ def tilemap_class(compil, tilemap):
         for i in tilemap.childs.values():
             text += "        self.add_component(" + i.name + "())\n"
     if tilemap.script != "":
+        text += "    \n"
         for i in tilemap.script.split("\n"):
             text += "    " + i + "\n"
     return text
@@ -174,6 +182,7 @@ def entity_class(compil, entity):
         for i in entity.childs.values():
             text += "        self.add_component(" + i.name + "())\n"
     if entity.script != "":
+        text += "    \n"
         for i in entity.script.split("\n"):
             text += "    " + i + "\n"
     return text
@@ -200,6 +209,7 @@ def world_class(self, world):
         for i in world.childs.values():
             text += "        self.esys.add_entity(" + i.name + "())\n"
     if world.script != "":
+        text += "    \n"
         for i in world.script.split("\n"):
             text += "    " + i + "\n"
     return text
@@ -247,6 +257,7 @@ def window_class(compil, window):
         text += "        self.world = self." + i.name.lower() + "\n"
     text += "        self.run()\n"
     if window.script != "":
+        text += "    \n"
         for i in window.script.split("\n"):
             text += "    " + i + "\n"
     text += "\n\n" + window.name + "()\n"
