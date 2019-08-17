@@ -42,7 +42,8 @@ properties = {
     "TextComponent": [
         ["Nom", "str", "Texte"],
         ["Texte", "str", ""],
-        ["Scale", "int", 0]
+        ["Scale", "int", 1],
+        ["Couleur", "color", [255, 255, 255]]
     ],
     "PhysicsComponent": [
         ["Nom", "str", "Physique"],
