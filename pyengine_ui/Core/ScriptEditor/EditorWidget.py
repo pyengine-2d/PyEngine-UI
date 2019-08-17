@@ -17,6 +17,7 @@ class EditorWidget(QPlainTextEdit):
         self.updateRequest.connect(self.update_linearea)
         self.cursorPositionChanged.connect(self.highlight_currentline)
 
+        self.setTabStopWidth(20)
         self.update_linearea_width(0)
         self.highlight_currentline()
 
