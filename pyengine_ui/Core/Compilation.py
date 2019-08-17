@@ -48,7 +48,13 @@ class Compilation:
     def clear_files(directory):
         for folder in ["Components", "Images", "Entities", "Worlds"]:
             if os.path.exists(os.path.join(directory, folder)):
-                [os.remove(os.path.join(directory, folder, i)) for i in os.listdir(os.path.join(directory, folder))
-                 if ".py" in i]
+                for i in os.listdir(os.path.join(directory, folder)):
+                    if i != "__pycache__":
+                        os.remove(os.path.join(directory, folder, i))
+                    else:
+                        for j in os.listdir(os.path.join(directory, folder, "__pycache__")):
+                            os.remove(os.path.join(directory, folder, "__pycache__", j))
+                        os.rmdir(os.path.join(directory, folder, "__pycache__"))
+                os.rmdir(os.path.join(directory, folder))
         if os.path.exists(os.path.join(directory, "Main.py")):
             os.remove(os.path.join(directory, "Main.py"))
