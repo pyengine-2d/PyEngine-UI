@@ -21,7 +21,7 @@ class ThemesWindow(QDialog):
         for i in os.listdir(os.path.join(os.path.dirname(__file__), "..", "..", "Themes")):
             if "theme.json" in os.listdir(os.path.join(os.path.dirname(__file__), "..", "..", "Themes", i)):
                 fichier = open(os.path.join(os.path.dirname(__file__), "..", "..", "Themes", i, "theme.json"),
-                               "r")
+                               "r", encoding="utf-8")
                 jsonfile = json.load(fichier)
                 jsonfile["folder"] = i
                 self.liste.append(jsonfile)
