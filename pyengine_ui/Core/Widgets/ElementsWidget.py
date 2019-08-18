@@ -1,15 +1,21 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QTreeWidgetItem, QTreeWidget
+from PyQt5.QtWidgets import QTreeWidgetItem, QTreeWidget, QAbstractItemView, QMessageBox
 
 from pyengine_ui.Core.Widgets.PropertiesWidget import PropertiesWidget
+from pyengine_ui.Core.Utils.ObjectUtils import get_parent_types
 
 
 class ElementsWidget(QTreeWidget):
     def __init__(self, parent):
         super(ElementsWidget, self).__init__()
         self.parent = parent
+        self.dragged = None
 
         self.setHeaderLabel("Elements du Projet")
+        self.setDragEnabled(True)
+        self.viewport().setAcceptDrops(True)
+        self.setDropIndicatorShown(True)
+        self.setDragDropMode(QAbstractItemView.InternalMove)
 
         self.update_items()
 
@@ -18,16 +24,16 @@ class ElementsWidget(QTreeWidget):
     def update_items(self):
         self.clear()
 
-        for t, o in self.parent.project.objects.items():
-            treeitem = QTreeWidgetItem([t])
+        for o in self.parent.project.objects:
+            treeitem = QTreeWidgetItem([o.name])
             self.setup_childs(treeitem, o)
             self.addTopLevelItem(treeitem)
 
         self.expandAll()
 
     def setup_childs(self, widget, obj):
-        for t, o in obj.childs.items():
-            child = QTreeWidgetItem([t])
+        for o in obj.childs:
+            child = QTreeWidgetItem([o.name])
             widget.addChild(child)
             self.setup_childs(child, o)
 
@@ -36,6 +42,19 @@ class ElementsWidget(QTreeWidget):
             return self.findItems(text, Qt.MatchExactly | Qt.MatchRecursive)[0]
         except IndexError:
             return None
+
+    def dropEvent(self, event):
+        if not self.dragged.parent():
+            QMessageBox.warning(self, "PyEngine - Erreur", "Can't move Window")
+            return
+
+        super(ElementsWidget, self).dropEvent(event)
+
+        self.parent.project.update_objects(self.topLevelItem(0))
+
+    def dragEnterEvent(self, e):
+        self.dragged = self.currentItem()
+        super(ElementsWidget, self).dragEnterEvent(e)
 
     def clickedItem(self, item, column):
         liste = [item.text(0)]
@@ -46,9 +65,9 @@ class ElementsWidget(QTreeWidget):
         obj = None
         for i in liste:
             if obj is None:
-                obj = self.parent.project.objects[i]
+                obj = [o for o in self.parent.project.objects if o.name == i][0]
             else:
-                obj = obj.childs[i]
+                obj = [o for o in obj.childs if o.name == i][0]
 
         self.parent.properties.deleteLater()
         self.parent.properties = PropertiesWidget(self.parent, obj)

@@ -12,6 +12,15 @@ class Project:
         self.version = "0.0.1"
         self.objects = self.setup_objects()
 
+    def update_objects(self, item):
+        self.set_childs(self.objects[0], item, self.all_objects())
+
+    def set_childs(self, obj, item, liste):
+        obj.childs = []
+        for i in range(item.childCount()):
+            obj.childs.append([v for v in liste if v.name == item.child(i).text(0)][0])
+            self.set_childs(obj.childs[i], item.child(i), liste)
+
     def all_objects(self, element=None):
         if element is None:
             elements = self.objects
