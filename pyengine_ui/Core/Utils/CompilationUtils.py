@@ -78,12 +78,13 @@ def physics_class(compil, phys):
     elas = str(phys.properties["Elasticité"])
     mass = str(phys.properties["Masse"])
     solid = str(phys.properties["Solide"])
+    rotation = str(phys.properties["Rotation"])
 
     text = "from pyengine.Components import PhysicsComponent\n\n\n"
     text += "class " + phys.name + "(PhysicsComponent):\n"
     text += "    def __init__(self):\n"
     text += "        super(" + phys.name + ", self).__init__(" + agravity + ", " + fric + ", " + elas + ", " + \
-            mass + ", " + solid + ")\n"
+            mass + ", " + solid + ", " + rotation + ")\n"
     text += "        try:\n"
     text += "            self.init()\n"
     text += "        except AttributeError:\n"

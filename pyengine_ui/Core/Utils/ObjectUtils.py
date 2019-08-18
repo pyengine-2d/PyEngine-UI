@@ -52,6 +52,7 @@ properties = {
         ["Elasticité", "int", 0],
         ["Masse", "int", 0],
         ["Solide", "bool", True]
+        ["Rotation", "bool", True]
     ],
     "MoveComponent": [
         ["Nom", "str", "Mouvement"],
