@@ -54,7 +54,8 @@ class Window(QMainWindow):
     def closeEvent(self, event):
         self.config.set("theme", self.theme)
         self.config.save()
-        if QMessageBox.question(self, "PyEngine - Projet", "Voulez-vous enregistrer le projet actuel?"):
+        if QMessageBox.question(self, "PyEngine - Projet", "Voulez-vous enregistrer le projet actuel?") \
+                == QMessageBox.Yes:
             self.action_on_project("save")
         event.accept()
 
