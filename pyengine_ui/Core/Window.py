@@ -102,8 +102,8 @@ class Window(QMainWindow):
             self.windows["launch"].show()
         elif type_ == "deleteE":
             if self.elements.currentItem() is not None:
-                obj = [v for k, v in self.project.all_objects().items() if k == self.elements.currentItem().text(0)][0]
-                del obj.parent.childs[obj.name]
+                for v in [v for v in self.project.all_objects() if v.name == self.elements.currentItem().text(0)]:
+                        v.parent.childs.remove(v)
                 self.elements.update_items()
         elif type_ == "compile":
             self.compil.compile()

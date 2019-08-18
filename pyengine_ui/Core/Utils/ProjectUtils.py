@@ -19,14 +19,14 @@ class Project:
             elements = element.childs
         if len(elements):
             obj = elements
-            for v in elements.values():
-                obj = {**obj, **self.all_objects(v)}
+            for v in elements:
+                obj = [*obj, *self.all_objects(v)]
         else:
-            obj = {}
+            obj = []
         return obj
 
     def save(self):
-        objects = {k: v.to_json() for k, v in self.objects.items()}
+        objects = [v.to_json() for v in self.objects]
         file = {"Name": self.project_name, "Folder": self.project_folder, "Author": self.author,
                 "Version": self.version, "Objects": objects}
         with open(os.path.join(self.project_folder, self.project_name, "project.json"), "w") as f:
@@ -39,17 +39,17 @@ class Project:
         self.project_folder = dic["Folder"]
         self.author = dic["Author"]
         self.version = dic["Version"]
-        self.objects = {k: Object("", "").from_json(v) for k, v in dic["Objects"].items()}
+        self.objects = [Object("", "").from_json(v) for v in dic["Objects"]]
 
     @staticmethod
     def setup_objects():
-        obj = {}
+        obj = []
 
         window = Object("Fenetre", "Window")
         world = Object("Monde", "World")
         world.parent = window
-        window.childs["Monde"] = world
+        window.childs.append(world)
 
-        obj["Fenetre"] = window
+        obj.append(window)
 
         return obj

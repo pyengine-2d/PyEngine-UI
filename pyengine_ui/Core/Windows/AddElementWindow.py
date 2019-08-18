@@ -63,11 +63,12 @@ class AddElementWindow(QDialog):
         elif self.parentlist.currentItem() is None:
             QMessageBox.warning(self, "Erreur", "Le parent de l'élément n'a pas été fourni")
         else:
-            for k, v in self.parent.project.all_objects().items():
-                if k == self.parentlist.currentItem().text():
+            for v in self.parent.project.all_objects():
+                if v.name == self.parentlist.currentItem().text():
                     obj = Object(self.nameInput.text(), self.typelist.currentItem().text())
                     obj.parent = v
-                    v.childs[self.nameInput.text()] = obj
+                    v.childs.append(obj)
+                    break
             self.parent.elements.update_items()
             self.close()
 
@@ -75,7 +76,7 @@ class AddElementWindow(QDialog):
         item = current.text()
         self.parentlist.clear()
         self.parentlist.addItems(
-            [k for k, v in self.parent.project.all_objects().items() if v.type_ in get_parent_types(item)]
+            [v.name for v in self.parent.project.all_objects() if v.type_ in get_parent_types(item)]
         )
 
 

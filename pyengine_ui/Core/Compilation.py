@@ -21,7 +21,7 @@ class Compilation:
         directory = os.path.join(self.project.project_folder, self.project.project_name)
         self.clear_files(directory)
 
-        for i in self.project.all_objects().values():
+        for i in self.project.all_objects():
             if "Component" in i.type_:
                 os.makedirs(os.path.join(directory, "Components"), exist_ok=True)
                 with open(os.path.join(directory, "Components", i.name.capitalize()+".py"), "w", encoding="utf-8") as f:

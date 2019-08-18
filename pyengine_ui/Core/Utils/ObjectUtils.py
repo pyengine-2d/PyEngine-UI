@@ -95,7 +95,7 @@ class Object:
         self.properties = {k[0]: k[2] for k in get_properties(type_)}
         self.type_ = type_
         self.name = name
-        self.childs = {}
+        self.childs = []
         self.parent = None
         self.script = ""
 
@@ -105,7 +105,7 @@ class Object:
 
     def to_json(self):
         return {"Type": self.type_, "Name": self.name, "Properties": self.properties, "Script": self.script,
-                "Childs": {k: v.to_json() for k, v in self.childs.items()}}
+                "Childs": [v.to_json() for v in self.childs]}
 
     def from_json(self, dic, parent=None):
         self.type_ = dic["Type"]
@@ -113,5 +113,5 @@ class Object:
         self.properties = dic["Properties"]
         self.parent = parent
         self.script = dic["Script"]
-        self.childs = {k: Object("", "").from_json(v, self) for k, v in dic["Childs"].items()}
+        self.childs = [Object("", "").from_json(v, self) for v in dic["Childs"]]
         return self

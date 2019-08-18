@@ -92,12 +92,6 @@ class PropertiesWidget(QWidget):
             element = self.parent.elements.get_item(self.obj.name)
             if element is not None:
                 element.setText(0, text)
-                if self.obj.parent is None:
-                    self.parent.project.objects[text] = self.obj
-                    del self.parent.project.objects[self.obj.name]
-                else:
-                    self.obj.parent.childs[text] = self.obj
-                    del self.obj.parent.childs[self.obj.name]
                 self.obj.name = text
 
     def set_bool_for(self, state, prop):
