@@ -103,6 +103,9 @@ class Window(QMainWindow):
         elif type_ == "deleteE":
             if self.elements.currentItem() is not None:
                 for v in [v for v in self.project.all_objects() if v.name == self.elements.currentItem().text(0)]:
+                    if v.parent is None:
+                        QMessageBox.warning(self, "PyEngine - Erreur", "Vous ne pouvez pas supprimer la fenêtre.")
+                    else:
                         v.parent.childs.remove(v)
                 self.elements.update_items()
         elif type_ == "compile":
