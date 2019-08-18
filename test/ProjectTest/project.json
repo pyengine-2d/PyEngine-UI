@@ -74,6 +74,21 @@
                                     },
                                     "Script": "",
                                     "Childs": {}
+                                },
+                                "Physique": {
+                                    "Type": "PhysicsComponent",
+                                    "Name": "Physique",
+                                    "Properties": {
+                                        "Nom": "Physique",
+                                        "Affect\u00e9 par Gravit\u00e9": true,
+                                        "Friction": 1,
+                                        "Elasticit\u00e9": 1,
+                                        "Masse": 1,
+                                        "Solide": true,
+                                        "Rotation": true
+                                    },
+                                    "Script": "",
+                                    "Childs": {}
                                 }
                             }
                         }

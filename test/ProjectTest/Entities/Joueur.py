@@ -2,6 +2,7 @@ from pyengine.Entities import Entity
 from Components.Position import Position
 from Components.Sprite import Sprite
 from Components.Controle import Controle
+from Components.Physique import Physique
 
 
 class Joueur(Entity):
@@ -14,6 +15,7 @@ class Joueur(Entity):
         self.add_component(Position())
         self.add_component(Sprite())
         self.add_component(Controle())
+        self.add_component(Physique())
     
     def init(self):
         print("INITIALISATION")

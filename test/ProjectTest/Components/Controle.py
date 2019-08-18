@@ -4,7 +4,7 @@ from pyengine import ControlType
 
 class Controle(ControlComponent):
     def __init__(self):
-        super(Controle, self).__init__(ControlType.FOURDIRECTION, 10)
+        super(Controle, self).__init__(ControlType.CLASSICJUMP, 20)
         try:
             self.init()
         except AttributeError:

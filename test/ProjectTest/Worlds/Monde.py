@@ -1,6 +1,7 @@
 from pyengine import World
 from pyengine.Systems import EntitySystem
 from Entities.Joueur import Joueur
+from Entities.Plateforme import Plateforme
 
 
 class Monde(World):
@@ -12,3 +13,4 @@ class Monde(World):
             pass
         self.esys = self.get_system(EntitySystem)
         self.esys.add_entity(Joueur())
+        self.esys.add_entity(Plateforme())
