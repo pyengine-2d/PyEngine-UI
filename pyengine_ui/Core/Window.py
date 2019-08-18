@@ -18,7 +18,7 @@ class Window(QMainWindow):
         self.project = Project()
         self.compil = Compilation(self.project)
 
-        self.config = Config("config.json")
+        self.config = Config(os.path.join(os.path.dirname(__file__), "..", "config.json"))
         if not self.config.created:
             self.config.create({"theme": "default"})
 
