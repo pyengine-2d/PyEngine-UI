@@ -67,6 +67,7 @@ class AddElementWindow(QDialog):
                 if v.name == self.parentlist.currentItem().text():
                     obj = Object(self.nameInput.text(), self.typelist.currentItem().text())
                     obj.parent = v
+                    obj.set_property("Nom", self.nameInput.text())
                     v.childs.append(obj)
                     break
             self.parent.elements.update_items()

@@ -1,10 +1,10 @@
 {
     "Name": "ProjectTest",
     "Folder": "D:/Programmation/Python/Projet/pyengine/PyEngine-UI/test",
-    "Author": "LavaPower",
+    "Author": "Inconnu",
     "Version": "0.0.1",
-    "Objects": {
-        "Fenetre": {
+    "Objects": [
+        {
             "Type": "Window",
             "Name": "Fenetre",
             "Properties": {
@@ -18,8 +18,19 @@
                 "Debug": false
             },
             "Script": "",
-            "Childs": {
-                "Monde": {
+            "Childs": [
+                {
+                    "Type": "World",
+                    "Name": "Monde2",
+                    "Properties": {
+                        "Nom": "Monde2",
+                        "Gravit\u00e9 X": 0,
+                        "Gravit\u00e9 Y": -900
+                    },
+                    "Script": "",
+                    "Childs": []
+                },
+                {
                     "Type": "World",
                     "Name": "Monde",
                     "Properties": {
@@ -28,73 +39,9 @@
                         "Gravit\u00e9 Y": -900
                     },
                     "Script": "",
-                    "Childs": {
-                        "Joueur": {
-                            "Type": "Entity",
-                            "Name": "Joueur",
-                            "Properties": {
-                                "Nom": "Joueur"
-                            },
-                            "Script": "def init(self):\n    print(\"INITIALISATION\")",
-                            "Childs": {
-                                "Position": {
-                                    "Type": "PositionComponent",
-                                    "Name": "Position",
-                                    "Properties": {
-                                        "Nom": "Position",
-                                        "Position X": 200,
-                                        "Position Y": 100,
-                                        "Offset X": 0,
-                                        "Offset Y": 0
-                                    },
-                                    "Script": "",
-                                    "Childs": {}
-                                },
-                                "Sprite": {
-                                    "Type": "SpriteComponent",
-                                    "Name": "Sprite",
-                                    "Properties": {
-                                        "Nom": "Sprite",
-                                        "Image": "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/sprite0.png",
-                                        "Scale": 1,
-                                        "Rotation": 0,
-                                        "Flip X": false,
-                                        "Flip Y": false
-                                    },
-                                    "Script": "",
-                                    "Childs": {}
-                                },
-                                "Controle": {
-                                    "Type": "ControlComponent",
-                                    "Name": "Controle",
-                                    "Properties": {
-                                        "Nom": "Controle",
-                                        "Type de Controle": "FOURDIRECTION",
-                                        "Vitesse": 10
-                                    },
-                                    "Script": "",
-                                    "Childs": {}
-                                },
-                                "Physique": {
-                                    "Type": "PhysicsComponent",
-                                    "Name": "Physique",
-                                    "Properties": {
-                                        "Nom": "Physique",
-                                        "Affect\u00e9 par Gravit\u00e9": true,
-                                        "Friction": 1,
-                                        "Elasticit\u00e9": 1,
-                                        "Masse": 1,
-                                        "Solide": true,
-                                        "Rotation": true
-                                    },
-                                    "Script": "",
-                                    "Childs": {}
-                                }
-                            }
-                        }
-                    }
+                    "Childs": []
                 }
-            }
+            ]
         }
-    }
+    ]
 }
