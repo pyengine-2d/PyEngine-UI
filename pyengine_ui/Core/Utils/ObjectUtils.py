@@ -48,10 +48,10 @@ properties = {
     "PhysicsComponent": [
         ["Nom", "str", "Physique"],
         ["Affecté par Gravité", "bool", True],
-        ["Friction", "int", 0],
-        ["Elasticité", "int", 0],
-        ["Masse", "int", 0],
-        ["Solide", "bool", True]
+        ["Friction", "int", 1],
+        ["Elasticité", "int", 1],
+        ["Masse", "int", 1],
+        ["Solide", "bool", True],
         ["Rotation", "bool", True]
     ],
     "MoveComponent": [
@@ -61,9 +61,9 @@ properties = {
     ],
     "ControlComponent": [
         ["Nom", "str", "Controle"],
-        ["Type de Controle", "list|FOURDIRECTION, CLASSICJUMP, DOUBLEJUMP, CLICKFOLLOW, LEFTRIGHT, UPDOWN, MOUSEFOLLOW",
+        ["Type de Controle", "list|FOURDIRECTION, CLASSICJUMP, CLICKFOLLOW, LEFTRIGHT, UPDOWN, MOUSEFOLLOW",
          "FOURDIRECTION"],
-        ["Vitesse", "int", 250]
+        ["Vitesse", "int", 20]
     ]
 }
 
