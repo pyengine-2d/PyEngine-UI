@@ -11,6 +11,12 @@
                 "Nom": "Fenetre",
                 "Largeur": 900,
                 "Hauteur": 600,
+                "Couleur": [
+                    255,
+                    255,
+                    255,
+                    255
+                ],
                 "Titre": "PyEngine Game",
                 "Icon": "",
                 "FPS Max": 0,
@@ -21,17 +27,6 @@
             "Childs": [
                 {
                     "Type": "World",
-                    "Name": "Monde2",
-                    "Properties": {
-                        "Nom": "Monde2",
-                        "Gravit\u00e9 X": 0,
-                        "Gravit\u00e9 Y": -900
-                    },
-                    "Script": "",
-                    "Childs": []
-                },
-                {
-                    "Type": "World",
                     "Name": "Monde",
                     "Properties": {
                         "Nom": "Monde",
@@ -39,7 +34,54 @@
                         "Gravit\u00e9 Y": -900
                     },
                     "Script": "",
-                    "Childs": []
+                    "Childs": [
+                        {
+                            "Type": "Entity",
+                            "Name": "E",
+                            "Properties": {
+                                "Nom": "E"
+                            },
+                            "Script": "",
+                            "Childs": [
+                                {
+                                    "Type": "PositionComponent",
+                                    "Name": "Pos",
+                                    "Properties": {
+                                        "Nom": "Pos",
+                                        "Position X": 100,
+                                        "Position Y": 200,
+                                        "Offset X": 0,
+                                        "Offset Y": 0
+                                    },
+                                    "Script": "",
+                                    "Childs": []
+                                },
+                                {
+                                    "Type": "TextComponent",
+                                    "Name": "Text",
+                                    "Properties": {
+                                        "Nom": "Text",
+                                        "Texte": "Michel est pas mort !",
+                                        "Scale": 1,
+                                        "Couleur": [
+                                            0,
+                                            0,
+                                            0,
+                                            255
+                                        ],
+                                        "Font": null,
+                                        "Nom Police": "arial",
+                                        "Taille Police": 15,
+                                        "Italique": true,
+                                        "Gras": true,
+                                        "Soulign\u00e9": true
+                                    },
+                                    "Script": "",
+                                    "Childs": []
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
