@@ -57,12 +57,12 @@ class PropertiesWidget(QWidget):
                 widget.setCurrentText(self.obj.properties.get(p[0], p[1].split("|")[1].split(", ")[0]))
                 widget.currentTextChanged.connect(lambda value="", prop=p[0]: self.set_text_for(value, prop))
             elif p[1] == "color":
-                widget = QPushButton("Selectionner")
+                widget = QPushButton("Sélectionner")
                 widget.clicked.connect(lambda checked=False, prop=p[0]: self.set_color_for(prop))
             elif p[1] == "colorNone":
                 widget = QWidget()
                 layout = QGridLayout()
-                select = QPushButton("Selectionner")
+                select = QPushButton("Sélectionner")
                 select.clicked.connect(lambda checked=False, prop=p[0]: self.set_color_for(prop))
                 delete = QPushButton("Supprimer")
                 delete.clicked.connect(lambda checked=False, prop=p[0]: self.set_none_for(prop))
@@ -70,7 +70,7 @@ class PropertiesWidget(QWidget):
                 layout.addWidget(delete, 0, 1)
                 widget.setLayout(layout)
             elif p[1] == "file":
-                widget = QPushButton("Selectionner")
+                widget = QPushButton("Sélectionner")
                 widget.clicked.connect(lambda checked=False, prop=p[0]: self.set_file_for(prop))
             elif p[1] == "files":
                 widget = QPushButton("Sélectionner")
