@@ -10,6 +10,24 @@ def add_init():
     return text
 
 
+def life_class(compil, life):
+    mlife = str(life.properties["Vie Max"])
+    callback = str(life.properties["Callback"])
+
+    text = "from pyengine.Components import LifeComponent\n\n\n"
+    text += "class " + life.name + "(LifeComponent):\n"
+    text += "    def __init__(self):\n"
+    text += "        super(" + life.name + ", self).__init__(" + mlife + ")\n"
+    text += add_init()
+    if callback != "":
+        text += "        self.callback = self." + callback + "\n"
+    if life.script != "":
+        text += "    \n"
+        for i in life.script.split("\n"):
+            text += "    " + i + "\n"
+    return text
+
+
 def control_class(compil, con):
     type_ = str(con.properties["Type de Controle"])
     speed = str(con.properties["Vitesse"])
@@ -87,6 +105,7 @@ def physics_class(compil, phys):
     mass = str(phys.properties["Masse"])
     solid = str(phys.properties["Solide"])
     rotation = str(phys.properties["Rotation"])
+    callback = str(phys.properties["Callback"])
 
     text = "from pyengine.Components import PhysicsComponent\n\n\n"
     text += "class " + phys.name + "(PhysicsComponent):\n"

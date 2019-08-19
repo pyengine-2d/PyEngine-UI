@@ -77,6 +77,10 @@ properties = {
         ["Controle Droit", "str", "RIGHT"],
         ["Controle Bas", "str", "DOWN"]
     ],
+    "LifeComponent": [
+        ["Nom", "str", "Life"],
+        ["Vie Max", "int", 100],
+        ["Callback", "str", ""]
     ]
 }
 
@@ -89,7 +93,8 @@ parent = {
     "TextComponent": ["Entity"],
     "PhysicsComponent": ["Entity"],
     "MoveComponent": ["Entity"],
-    "ControlComponent": ["Entity"]
+    "ControlComponent": ["Entity"],
+    "LifeComponent": ["Entity"]
 }
 
 types = parent.keys()
