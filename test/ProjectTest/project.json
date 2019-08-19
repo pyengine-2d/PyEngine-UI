@@ -57,24 +57,32 @@
                                     "Childs": []
                                 },
                                 {
-                                    "Type": "TextComponent",
-                                    "Name": "Text",
+                                    "Type": "SpriteComponent",
+                                    "Name": "Sprite",
                                     "Properties": {
-                                        "Nom": "Text",
-                                        "Texte": "Michel est pas mort !",
+                                        "Nom": "Sprite",
+                                        "Image": "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/sprite0.png",
                                         "Scale": 1,
-                                        "Couleur": [
-                                            0,
-                                            0,
-                                            0,
-                                            255
+                                        "Rotation": 0,
+                                        "Flip X": false,
+                                        "Flip Y": false
+                                    },
+                                    "Script": "",
+                                    "Childs": []
+                                },
+                                {
+                                    "Type": "AnimComponent",
+                                    "Name": "Anim",
+                                    "Properties": {
+                                        "Nom": "Anim",
+                                        "Timer": 20,
+                                        "Images": [
+                                            "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/idle.png",
+                                            "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/sprite0.png",
+                                            "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/test.gif"
                                         ],
-                                        "Font": null,
-                                        "Nom Police": "arial",
-                                        "Taille Police": 15,
-                                        "Italique": true,
-                                        "Gras": true,
-                                        "Soulign\u00e9": true
+                                        "Flip X": false,
+                                        "Flip Y": false
                                     },
                                     "Script": "",
                                     "Childs": []
