@@ -10,6 +10,34 @@ def add_init():
     return text
 
 
+def anim_class(compil, anim):
+    images = anim.properties["Images"]
+    timer = str(anim.properties["Timer"])
+    flipx = str(anim.properties["Flip X"])
+    flipy = str(anim.properties["Flip Y"])
+    sprites = []
+
+    if images != [] and images != "":
+        for i in images:
+            directory = os.path.join(compil.project.project_folder, compil.project.project_name)
+            os.makedirs(os.path.join(directory, "Images"), exist_ok=True)
+            filename = os.path.basename(i)
+            shutil.copyfile(i, os.path.join(directory, "Images", filename))
+            sprites.append("Images/" + filename)
+
+    text = "from pyengine.Components import AnimComponent\n\n\n"
+    text += "class " + anim.name + "(AnimComponent):\n"
+    text += "    def __init__(self):\n"
+    text += "        super(" + anim.name + ", self).__init__(" + timer + ", " + str(sprites) + ", " + \
+            flipx + ", " + flipy + ")\n"
+    text += add_init()
+    if anim.script != "":
+        text += "    \n"
+        for i in anim.script.split("\n"):
+            text += "    " + i + "\n"
+    return text
+
+
 def life_class(compil, life):
     mlife = str(life.properties["Vie Max"])
     callback = str(life.properties["Callback"])
