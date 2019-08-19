@@ -1,4 +1,4 @@
-from pyengine_ui.Core.Utils.CompilationUtils import *
+from pyengine_ui.Core.CompilationClasses import *
 
 
 class Compilation:
