@@ -72,6 +72,9 @@ class PropertiesWidget(QWidget):
             elif p[1] == "file":
                 widget = QPushButton("Selectionner")
                 widget.clicked.connect(lambda checked=False, prop=p[0]: self.set_file_for(prop))
+            elif p[1] == "files":
+                widget = QPushButton("Sélectionner")
+                widget.clicked.connect(lambda checked=False, prop=p[0]: self.set_files_for(prop))
             else:
                 raise TypeError("Unknown type for properties : "+p[1])
             self.grid.addWidget(widget, nb, 1)
@@ -116,6 +119,10 @@ class PropertiesWidget(QWidget):
     def set_file_for(self, prop):
         directory = os.environ.get('HOME', os.environ.get('USERPROFILE', os.path.dirname(__file__)))
         self.obj.set_property(prop, QFileDialog.getOpenFileName(self, "Fichier : "+prop, directory)[0])
+
+    def set_files_for(self, prop):
+        directory = os.environ.get('HOME', os.environ.get('USERPROFILE', os.path.dirname(__file__)))
+        self.obj.set_property(prop, QFileDialog.getOpenFileNames(self, "Fichiers : "+prop, directory)[0])
 
     def set_color_for(self, prop):
         if self.obj.properties[prop] is not None:
