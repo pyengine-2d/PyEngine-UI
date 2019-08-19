@@ -20,7 +20,7 @@ class Window(QMainWindow):
 
         self.config = Config(os.path.join(os.path.dirname(__file__), "..", "config.json"))
         if not self.config.created:
-            self.config.create({"theme": "default"})
+            self.config.create({"theme": "default", "last_name": "", "last_folder": ""})
 
         self.centralWidget = QWidget()
         self.grid = QGridLayout(self.centralWidget)
@@ -52,6 +52,8 @@ class Window(QMainWindow):
         self.windows["launch"].show()
 
     def closeEvent(self, event):
+        self.config.set("last_name", self.project.project_name)
+        self.config.set("last_folder", self.project.project_folder)
         self.config.set("theme", self.theme)
         self.config.save()
         if QMessageBox.question(self, "PyEngine - Projet", "Voulez-vous enregistrer le projet actuel?") \

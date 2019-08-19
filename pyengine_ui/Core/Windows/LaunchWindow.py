@@ -10,7 +10,7 @@ class LaunchWindow(QDialog):
     def __init__(self, parent):
         super(LaunchWindow, self).__init__()
         self.parent = parent
-        self.folder = ""
+        self.folder = self.parent.config.get("last_folder")
         self.setWindowTitle("PyEngine - Projet")
 
         self.grid = QGridLayout()
@@ -20,6 +20,7 @@ class LaunchWindow(QDialog):
         self.nameLabel = Label("Nom", 12)
         self.nameLabel.setAlignment(Qt.AlignHCenter)
         self.nameInput = QLineEdit()
+        self.nameInput.setText(self.parent.config.get("last_name"))
         self.folderLabel = Label("Dossier", 12)
         self.folderLabel.setAlignment(Qt.AlignHCenter)
         self.folderButton = QPushButton("Selectionner")
