@@ -59,6 +59,16 @@ class PropertiesWidget(QWidget):
             elif p[1] == "color":
                 widget = QPushButton("Selectionner")
                 widget.clicked.connect(lambda checked=False, prop=p[0]: self.set_color_for(prop))
+            elif p[1] == "colorNone":
+                widget = QWidget()
+                layout = QGridLayout()
+                select = QPushButton("Selectionner")
+                select.clicked.connect(lambda checked=False, prop=p[0]: self.set_color_for(prop))
+                delete = QPushButton("Supprimer")
+                delete.clicked.connect(lambda checked=False, prop=p[0]: self.set_none_for(prop))
+                layout.addWidget(select, 0, 0)
+                layout.addWidget(delete, 0, 1)
+                widget.setLayout(layout)
             elif p[1] == "file":
                 widget = QPushButton("Selectionner")
                 widget.clicked.connect(lambda checked=False, prop=p[0]: self.set_file_for(prop))
@@ -100,12 +110,18 @@ class PropertiesWidget(QWidget):
     def set_int_for(self, value, prop):
         self.obj.set_property(prop, value)
 
+    def set_none_for(self, prop):
+        self.obj.set_property(prop, None)
+
     def set_file_for(self, prop):
         directory = os.environ.get('HOME', os.environ.get('USERPROFILE', os.path.dirname(__file__)))
         self.obj.set_property(prop, QFileDialog.getOpenFileName(self, "Fichier : "+prop, directory)[0])
 
     def set_color_for(self, prop):
-        qcolor = QColorDialog.getColor(QColor(*self.obj.properties[prop]))
+        if self.obj.properties[prop] is not None:
+            qcolor = QColorDialog.getColor(QColor(*self.obj.properties[prop]))
+        else:
+            qcolor = QColorDialog.getColor()
         self.obj.set_property(prop, qcolor.getRgb())
 
 
