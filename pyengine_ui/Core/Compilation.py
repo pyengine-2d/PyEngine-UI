@@ -6,6 +6,7 @@ class Compilation:
         self.project = project
         self.class_function = {
             "AnimComponent": anim_class,
+            "LifeComponent": life_class,
             "ControlComponent": control_class,
             "PositionComponent": position_class,
             "SpriteComponent": sprite_class,
