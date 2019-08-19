@@ -13,12 +13,20 @@ def add_init():
 def control_class(compil, con):
     type_ = str(con.properties["Type de Controle"])
     speed = str(con.properties["Vitesse"])
+    ch = str(con.properties["Controle Haut"])
+    cg = str(con.properties["Controle Gauche"])
+    cd = str(con.properties["Controle Droit"])
+    cb = str(con.properties["Controle Bas"])
 
     text = "from pyengine.Components import ControlComponent\nfrom pyengine import ControlType, Controls, const\n\n\n"
     text += "class " + con.name + "(ControlComponent):\n"
     text += "    def __init__(self):\n"
     text += "        super(" + con.name + ", self).__init__(ControlType." + type_ + ", " + speed + ")\n"
     text += add_init()
+    text += "        self.set_control(Controls.UPJUMP, const.K_" + ch + ")\n"
+    text += "        self.set_control(Controls.LEFT, const.K_" + cg + ")\n"
+    text += "        self.set_control(Controls.RIGHT, const.K_" + cd + ")\n"
+    text += "        self.set_control(Controls.DOWN, const.K_" + cb + ")\n"
     if con.script != "":
         text += "    \n"
         for i in con.script.split("\n"):
@@ -86,6 +94,8 @@ def physics_class(compil, phys):
     text += "        super(" + phys.name + ", self).__init__(" + agravity + ", " + fric + ", " + elas + ", " + \
             mass + ", " + solid + ", " + rotation + ")\n"
     text += add_init()
+    if callback != "":
+        text += "        self.callback = self." + callback + "\n"
     if phys.script != "":
         text += "    \n"
         for i in phys.script.split("\n"):
@@ -113,10 +123,21 @@ def text_class(compil, txt):
     texte = str(txt.properties["Texte"])
     scale = str(txt.properties["Scale"])
     color = txt.properties["Couleur"]
+    font = txt.properties["Font"]
+    npolice = str(txt.properties["Nom Police"])
+    tpolice = str(txt.properties["Taille Police"])
+    ipolice = str(txt.properties["Italique"])
+    gpolice = str(txt.properties["Gras"])
+    spolice = str(txt.properties["Souligné"])
+
     text = "from pyengine.Components import TextComponent\nfrom pyengine.Utils import Color, Font\n\n\n"
     text += "class " + txt.name + "(TextComponent):\n"
     text += "    def __init__(self):\n"
     text += "        super(" + txt.name + ', self).__init__("' + texte + '", Color(' + str(color[0]) + ", " \
+            + str(color[1]) + ", " + str(color[2]) + '), Font("' + npolice + '", ' + tpolice + ", " + ipolice + \
+            ", " + gpolice + ", " + spolice + ")"
+    if font is not None:
+        text += ", Color(" + str(font[0]) + ", " + str(font[1]) + ", " + str(font[2]) + ")"
     text += ", scale=" + scale + ")\n"
     text += add_init()
     if txt.script != "":

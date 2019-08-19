@@ -37,6 +37,7 @@ def world_class(self, world):
 def window_class(compil, window):
     largeur = str(window.properties["Largeur"])
     hauteur = str(window.properties["Hauteur"])
+    color = window.properties["Couleur"]
     titre = str(window.properties["Titre"])
     icon = str(window.properties["Icon"])
     if window.properties["FPS Max"] == 0:
@@ -60,6 +61,7 @@ def window_class(compil, window):
     text += "\n\nclass " + window.name + "(Window):\n"
     text += "    def __init__(self):\n"
     text += "        super(" + window.name + ", self).__init__(" + largeur + ", " + hauteur + ", Color(" + \
+            str(color[0]) + ", " + str(color[1]) + ", " + str(color[2]) + ")"
     if titre != "":
         text += ', title="' + titre + '"'
     if icon != "":

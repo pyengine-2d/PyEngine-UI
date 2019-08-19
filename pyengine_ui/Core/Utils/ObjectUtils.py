@@ -3,6 +3,7 @@ properties = {
         ["Nom", "str", "Fenetre"],
         ["Largeur", "int", 900],
         ["Hauteur", "int", 600],
+        ["Couleur", "color", [0, 0, 0]],
         ["Titre", "str", "PyEngine Game"],
         ["Icon", "file", ""],
         ["FPS Max", "int", 0],
@@ -43,7 +44,13 @@ properties = {
         ["Nom", "str", "Texte"],
         ["Texte", "str", ""],
         ["Scale", "int", 1],
-        ["Couleur", "color", [255, 255, 255]]
+        ["Couleur", "color", [255, 255, 255]],
+        ["Font", "colorNone", None],
+        ["Nom Police", "str", "arial"],
+        ["Taille Police", "int", 15],
+        ["Italique", "bool", False],
+        ["Gras", "bool", False],
+        ["Souligné", "bool", False]
     ],
     "PhysicsComponent": [
         ["Nom", "str", "Physique"],
@@ -52,7 +59,8 @@ properties = {
         ["Elasticité", "int", 1],
         ["Masse", "int", 1],
         ["Solide", "bool", True],
-        ["Rotation", "bool", True]
+        ["Rotation", "bool", True],
+        ["Callback", "str", ""]
     ],
     "MoveComponent": [
         ["Nom", "str", "Mouvement"],
@@ -63,7 +71,12 @@ properties = {
         ["Nom", "str", "Controle"],
         ["Type de Controle", "list|FOURDIRECTION, CLASSICJUMP, CLICKFOLLOW, LEFTRIGHT, UPDOWN, MOUSEFOLLOW",
          "FOURDIRECTION"],
-        ["Vitesse", "int", 20]
+        ["Vitesse", "int", 20],
+        ["Controle Haut", "str", "UP"],
+        ["Controle Gauche", "str", "LEFT"],
+        ["Controle Droit", "str", "RIGHT"],
+        ["Controle Bas", "str", "DOWN"]
+    ],
     ]
 }
 
