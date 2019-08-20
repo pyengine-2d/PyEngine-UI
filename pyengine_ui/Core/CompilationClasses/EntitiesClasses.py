@@ -3,11 +3,7 @@ import shutil
 
 
 def add_init():
-    text = "        try:\n"
-    text += "            self.init()\n"
-    text += "        except AttributeError:\n"
-    text += "            pass\n"
-    return text
+    return "        try:\n", "            self.init()\n", "        except AttributeError:\n", "            pass\n"
 
 
 def tilemap_class(compil, tilemap):
@@ -23,39 +19,43 @@ def tilemap_class(compil, tilemap):
         shutil.copyfile(file, os.path.join(directory, "JSON", filename))
         file = "JSON/" + filename
 
-    text = "from pyengine.Entities import Tilemap\nfrom pyengine.Utils import Vec2\n"
+    text = ["from pyengine.Entities import Tilemap\nfrom pyengine.Utils import Vec2\n"]
     if len(tilemap.childs):
         for i in tilemap.childs:
-            text += "from Components." + i.name.capitalize() + " import " + i.name + "\n"
-    text += "\n\nclass " + tilemap.name + "(Tilemap):\n"
-    text += "    def __init__(self):\n"
-    text += "        super(" + tilemap.name + ", self).__init__(Vec2(" + pos_x + ", " + pos_y + "), " + file + \
-            ", " + scale + ")\n"
+            text.append("from Components." + i.name.capitalize() + " import " + i.name + "\n")
+    text += [
+        "\n\nclass " + tilemap.name + "(Tilemap):\n",
+        "    def __init__(self):\n",
+        "        super(" + tilemap.name + ", self).__init__(Vec2(" + pos_x + ", " + pos_y + "), " + file + ", " + scale
+        + ")\n"
+    ]
     text += add_init()
     if len(tilemap.childs):
         for i in tilemap.childs:
-            text += "        self.add_component(" + i.name + "())\n"
+            text.append("        self.add_component(" + i.name + "())\n")
     if tilemap.script != "":
-        text += "    \n"
+        text.append("    \n")
         for i in tilemap.script.split("\n"):
-            text += "    " + i + "\n"
-    return text
+            text.append("    " + i + "\n")
+    return "".join(text)
 
 
 def entity_class(compil, entity):
-    text = "from pyengine.Entities import Entity\n"
+    text = ["from pyengine.Entities import Entity\n"]
     if len(entity.childs):
         for i in entity.childs:
-            text += "from Components." + i.name.capitalize() + " import " + i.name + "\n"
-    text += "\n\nclass " + entity.name + "(Entity):\n"
-    text += "    def __init__(self):\n"
-    text += "        super(" + entity.name + ", self).__init__()\n"
+            text.append("from Components." + i.name.capitalize() + " import " + i.name + "\n")
+    text += [
+        "\n\nclass " + entity.name + "(Entity):\n",
+        "    def __init__(self):\n"
+        "        super(" + entity.name + ", self).__init__()\n"
+    ]
     text += add_init()
     if len(entity.childs):
         for i in entity.childs:
-            text += "        self.add_component(" + i.name + "())\n"
+            text.append("        self.add_component(" + i.name + "())\n")
     if entity.script != "":
-        text += "    \n"
+        text.append("    \n")
         for i in entity.script.split("\n"):
-            text += "    " + i + "\n"
-    return text
+            text.append("    " + i + "\n")
+    return "".join(text)

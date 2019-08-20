@@ -2,7 +2,6 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QTreeWidgetItem, QTreeWidget, QAbstractItemView, QMessageBox
 
 from pyengine_ui.Core.Widgets.PropertiesWidget import PropertiesWidget
-from pyengine_ui.Core.Utils.ObjectUtils import get_parent_types
 
 
 class ElementsWidget(QTreeWidget):

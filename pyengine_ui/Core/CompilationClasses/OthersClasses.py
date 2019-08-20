@@ -3,35 +3,33 @@ import shutil
 
 
 def add_init():
-    text = "        try:\n"
-    text += "            self.init()\n"
-    text += "        except AttributeError:\n"
-    text += "            pass\n"
-    return text
+    return "        try:\n", "            self.init()\n", "        except AttributeError:\n", "            pass\n"
 
 
 def world_class(self, world):
     gravity_x = str(world.properties["Gravité X"])
     gravity_y = str(world.properties["Gravité Y"])
 
-    text = "from pyengine import World\n"
+    text = ["from pyengine import World\n"]
     if len(world.childs):
-        text += "from pyengine.Systems import EntitySystem\n"
+        text.append("from pyengine.Systems import EntitySystem\n")
         for i in world.childs:
-            text += "from Entities." + i.name.capitalize() + " import " + i.name + "\n"
-    text += "\n\nclass " + world.name + "(World):\n"
-    text += "    def __init__(self, window):\n"
-    text += "        super(" + world.name + ", self).__init__(window, [" + gravity_x + ", " + gravity_y + "])\n"
+            text.append("from Entities." + i.name.capitalize() + " import " + i.name + "\n")
+    text += [
+        "\n\nclass " + world.name + "(World):\n",
+        "    def __init__(self, window):\n",
+        "        super(" + world.name + ", self).__init__(window, [" + gravity_x + ", " + gravity_y + "])\n"
+    ]
     text += add_init()
     if len(world.childs):
-        text += "        self.esys = self.get_system(EntitySystem)\n"
+        text.append("        self.esys = self.get_system(EntitySystem)\n")
         for i in world.childs:
-            text += "        self.esys.add_entity(" + i.name + "())\n"
+            text.append("        self.esys.add_entity(" + i.name + "())\n")
     if world.script != "":
-        text += "    \n"
+        text.append("    \n")
         for i in world.script.split("\n"):
-            text += "    " + i + "\n"
-    return text
+            text.append("    " + i + "\n")
+    return "".join(text)
 
 
 def window_class(compil, window):
@@ -54,29 +52,31 @@ def window_class(compil, window):
         shutil.copyfile(icon, os.path.join(directory, "Images", filename))
         icon = "Images/" + filename
 
-    text = "from pyengine import Window\nfrom pyengine.Utils import Color\n"
+    text = ["from pyengine import Window\nfrom pyengine.Utils import Color\n"]
     if len(window.childs):
         for i in window.childs:
-            text += "from Worlds." + i.name.capitalize() + " import " + i.name + "\n"
-    text += "\n\nclass " + window.name + "(Window):\n"
-    text += "    def __init__(self):\n"
-    text += "        super(" + window.name + ", self).__init__(" + largeur + ", " + hauteur + ", Color(" + \
-            str(color[0]) + ", " + str(color[1]) + ", " + str(color[2]) + ")"
+            text.append("from Worlds." + i.name.capitalize() + " import " + i.name + "\n")
+    text += [
+        "\n\nclass " + window.name + "(Window):\n",
+        "    def __init__(self):\n",
+        "        super(" + window.name + ", self).__init__(" + largeur + ", " + hauteur + ", Color(" + str(color[0]) +
+        ", " + str(color[1]) + ", " + str(color[2]) + ")"
+    ]
     if titre != "":
-        text += ', title="' + titre + '"'
+        text.append(', title="' + titre + '"')
     if icon != "":
-        text += ', icon="' + icon + '"'
-    text += ", limit_fps=" + fps + ", update_rate=" + update + ", debug=" + debug + ")\n"
+        text.append(', icon="' + icon + '"')
+    text.append(", limit_fps=" + fps + ", update_rate=" + update + ", debug=" + debug + ")\n")
     text += add_init()
     if len(window.childs):
         i = None
         for i in window.childs:
-            text += "        self." + i.name.lower() + " = " + i.name + "(self)\n"
-        text += "        self.world = self." + i.name.lower() + "\n"
-    text += "        self.run()\n"
+            text.append("        self." + i.name.lower() + " = " + i.name + "(self)\n")
+        text.append("        self.world = self." + i.name.lower() + "\n")
+    text.append("        self.run()\n")
     if window.script != "":
-        text += "    \n"
+        text.append("    \n")
         for i in window.script.split("\n"):
-            text += "    " + i + "\n"
-    text += "\n\n" + window.name + "()\n"
-    return text
+            text.append("    " + i + "\n")
+    text.append("\n\n" + window.name + "()\n")
+    return "".join(text)

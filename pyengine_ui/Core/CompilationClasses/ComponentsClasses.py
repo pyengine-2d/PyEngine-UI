@@ -3,11 +3,7 @@ import shutil
 
 
 def add_init():
-    text = "        try:\n"
-    text += "            self.init()\n"
-    text += "        except AttributeError:\n"
-    text += "            pass\n"
-    return text
+    return "        try:\n", "            self.init()\n", "        except AttributeError:\n", "            pass\n"
 
 
 def anim_class(compil, anim):
@@ -25,35 +21,39 @@ def anim_class(compil, anim):
             shutil.copyfile(i, os.path.join(directory, "Images", filename))
             sprites.append("Images/" + filename)
 
-    text = "from pyengine.Components import AnimComponent\n\n\n"
-    text += "class " + anim.name + "(AnimComponent):\n"
-    text += "    def __init__(self):\n"
-    text += "        super(" + anim.name + ", self).__init__(" + timer + ", " + str(sprites) + ", " + \
-            flipx + ", " + flipy + ")\n"
+    text = [
+        "from pyengine.Components import AnimComponent\n\n\n",
+        "class " + anim.name + "(AnimComponent):\n",
+        "    def __init__(self):\n",
+        "        super(" + anim.name + ", self).__init__(" + timer + ", " + str(sprites) + ", " + flipx + ", " + flipy
+        + ")\n"
+    ]
     text += add_init()
     if anim.script != "":
-        text += "    \n"
+        text.append("    \n")
         for i in anim.script.split("\n"):
-            text += "    " + i + "\n"
-    return text
+            text.append("    " + i + "\n")
+    return "".join(text)
 
 
 def life_class(compil, life):
     mlife = str(life.properties["Vie Max"])
     callback = str(life.properties["Callback"])
 
-    text = "from pyengine.Components import LifeComponent\n\n\n"
-    text += "class " + life.name + "(LifeComponent):\n"
-    text += "    def __init__(self):\n"
-    text += "        super(" + life.name + ", self).__init__(" + mlife + ")\n"
+    text = [
+        "from pyengine.Components import LifeComponent\n\n\n",
+        "class " + life.name + "(LifeComponent):\n",
+        "    def __init__(self):\n",
+        "        super(" + life.name + ", self).__init__(" + mlife + ")\n"
+    ]
     text += add_init()
     if callback != "":
-        text += "        self.callback = self." + callback + "\n"
+        text.append("        self.callback = self." + callback + "\n")
     if life.script != "":
-        text += "    \n"
+        text.append("    \n")
         for i in life.script.split("\n"):
-            text += "    " + i + "\n"
-    return text
+            text.append("    " + i + "\n")
+    return "".join(text)
 
 
 def control_class(compil, con):
@@ -64,20 +64,24 @@ def control_class(compil, con):
     cd = str(con.properties["Controle Droit"])
     cb = str(con.properties["Controle Bas"])
 
-    text = "from pyengine.Components import ControlComponent\nfrom pyengine import ControlType, Controls, const\n\n\n"
-    text += "class " + con.name + "(ControlComponent):\n"
-    text += "    def __init__(self):\n"
-    text += "        super(" + con.name + ", self).__init__(ControlType." + type_ + ", " + speed + ")\n"
+    text = [
+        "from pyengine.Components import ControlComponent\nfrom pyengine import ControlType, Controls, const\n\n\n",
+        "class " + con.name + "(ControlComponent):\n",
+        "    def __init__(self):\n",
+        "        super(" + con.name + ", self).__init__(ControlType." + type_ + ", " + speed + ")\n"
+    ]
     text += add_init()
-    text += "        self.set_control(Controls.UPJUMP, const.K_" + ch + ")\n"
-    text += "        self.set_control(Controls.LEFT, const.K_" + cg + ")\n"
-    text += "        self.set_control(Controls.RIGHT, const.K_" + cd + ")\n"
-    text += "        self.set_control(Controls.DOWN, const.K_" + cb + ")\n"
+    text += [
+        "        self.set_control(Controls.UPJUMP, const.K_" + ch + ")\n",
+        "        self.set_control(Controls.LEFT, const.K_" + cg + ")\n",
+        "        self.set_control(Controls.RIGHT, const.K_" + cd + ")\n",
+        "        self.set_control(Controls.DOWN, const.K_" + cb + ")\n"
+    ]
     if con.script != "":
-        text += "    \n"
+        text.append("    \n")
         for i in con.script.split("\n"):
-            text += "    " + i + "\n"
-    return text
+            text.append("    " + i + "\n")
+    return "".join(text)
 
 
 def position_class(compil, pos):
@@ -86,17 +90,19 @@ def position_class(compil, pos):
     off_x = str(pos.properties["Offset X"])
     off_y = str(pos.properties["Offset Y"])
 
-    text = "from pyengine.Components import PositionComponent\nfrom pyengine.Utils import Vec2\n\n\n"
-    text += "class " + pos.name + "(PositionComponent):\n"
-    text += "    def __init__(self):\n"
-    text += "        super(" + pos.name + ", self).__init__(Vec2(" + pos_x + ", " + pos_y + "), Vec2(" + off_x + \
-            ", " + off_y + "))\n"
+    text = [
+        "from pyengine.Components import PositionComponent\nfrom pyengine.Utils import Vec2\n\n\n",
+        "class " + pos.name + "(PositionComponent):\n",
+        "    def __init__(self):\n",
+        "        super(" + pos.name + ", self).__init__(Vec2(" + pos_x + ", " + pos_y + "), Vec2(" + off_x +
+        ", " + off_y + "))\n"
+    ]
     text += add_init()
     if pos.script != "":
-        text += "    \n"
+        text.append("    \n")
         for i in pos.script.split("\n"):
-            text += "    " + i + "\n"
-    return text
+            text.append("    " + i + "\n")
+    return "".join(text)
 
 
 def sprite_class(compil, sprite):
@@ -113,17 +119,19 @@ def sprite_class(compil, sprite):
         shutil.copyfile(image, os.path.join(directory, "Images", filename))
         image = "Images/" + filename
 
-    text = "from pyengine.Components import SpriteComponent\n\n\n"
-    text += "class " + sprite.name + "(SpriteComponent):\n"
-    text += "    def __init__(self):\n"
-    text += "        super(" + sprite.name + ', self).__init__("' + image + '", ' + scale + ", " + rot + ", " + \
-            flipx + ", " + flipy + ")\n"
+    text = [
+        "from pyengine.Components import SpriteComponent\n\n\n",
+        "class " + sprite.name + "(SpriteComponent):\n",
+        "    def __init__(self):\n",
+        "        super(" + sprite.name + ', self).__init__("' + image + '", ' + scale + ", " + rot + ", " + flipx +
+        ", " + flipy + ")\n"
+    ]
     text += add_init()
     if sprite.script != "":
-        text += "    \n"
+        text.append("    \n")
         for i in sprite.script.split("\n"):
-            text += "    " + i + "\n"
-    return text
+            text.append("    " + i + "\n")
+    return "".join(text)
 
 
 def physics_class(compil, phys):
@@ -135,35 +143,39 @@ def physics_class(compil, phys):
     rotation = str(phys.properties["Rotation"])
     callback = str(phys.properties["Callback"])
 
-    text = "from pyengine.Components import PhysicsComponent\n\n\n"
-    text += "class " + phys.name + "(PhysicsComponent):\n"
-    text += "    def __init__(self):\n"
-    text += "        super(" + phys.name + ", self).__init__(" + agravity + ", " + fric + ", " + elas + ", " + \
-            mass + ", " + solid + ", " + rotation + ")\n"
+    text = [
+        "from pyengine.Components import PhysicsComponent\n\n\n",
+        "class " + phys.name + "(PhysicsComponent):\n",
+        "    def __init__(self):\n",
+        "        super(" + phys.name + ", self).__init__(" + agravity + ", " + fric + ", " + elas + ", " + mass + ", "
+        + solid + ", " + rotation + ")\n"
+    ]
     text += add_init()
     if callback != "":
-        text += "        self.callback = self." + callback + "\n"
+        text.append("        self.callback = self." + callback + "\n")
     if phys.script != "":
-        text += "    \n"
+        text.append("    \n")
         for i in phys.script.split("\n"):
-            text += "    " + i + "\n"
-    return text
+            text.append("    " + i + "\n")
+    return "".join(text)
 
 
 def move_class(compil, move):
     dirx = str(move.properties["Direction X"])
     diry = str(move.properties["Direction Y"])
 
-    text = "from pyengine.Components import MoveComponent\nfrom pyengine.Utils import Vec2\n\n\n"
-    text += "class " + move.name + "(MoveComponent):\n"
-    text += "    def __init__(self):\n"
-    text += "        super(" + move.name + ", self).__init__(Vec2(" + dirx + ", " + diry + "))\n"
+    text = [
+        "from pyengine.Components import MoveComponent\nfrom pyengine.Utils import Vec2\n\n\n",
+        "class " + move.name + "(MoveComponent):\n",
+        "    def __init__(self):\n",
+        "        super(" + move.name + ", self).__init__(Vec2(" + dirx + ", " + diry + "))\n"
+    ]
     text += add_init()
     if move.script != "":
-        text += "    \n"
+        text.append("    \n")
         for i in move.script.split("\n"):
-            text += "    " + i + "\n"
-    return text
+            text.append("    " + i + "\n")
+    return "".join(text)
 
 
 def text_class(compil, txt):
@@ -177,18 +189,20 @@ def text_class(compil, txt):
     gpolice = str(txt.properties["Gras"])
     spolice = str(txt.properties["Souligné"])
 
-    text = "from pyengine.Components import TextComponent\nfrom pyengine.Utils import Color, Font\n\n\n"
-    text += "class " + txt.name + "(TextComponent):\n"
-    text += "    def __init__(self):\n"
-    text += "        super(" + txt.name + ', self).__init__("' + texte + '", Color(' + str(color[0]) + ", " \
-            + str(color[1]) + ", " + str(color[2]) + '), Font("' + npolice + '", ' + tpolice + ", " + ipolice + \
-            ", " + gpolice + ", " + spolice + ")"
+    text = [
+        "from pyengine.Components import TextComponent\nfrom pyengine.Utils import Color, Font\n\n\n",
+        "class " + txt.name + "(TextComponent):\n",
+        "    def __init__(self):\n",
+        "        super(" + txt.name + ', self).__init__("' + texte + '", Color(' + str(color[0]) + ", " +
+        str(color[1]) + ", " + str(color[2]) + '), Font("' + npolice + '", ' + tpolice + ", " + ipolice + ", " +
+        gpolice + ", " + spolice + ")"
+    ]
     if font is not None:
-        text += ", Color(" + str(font[0]) + ", " + str(font[1]) + ", " + str(font[2]) + ")"
-    text += ", scale=" + scale + ")\n"
+        text.append(", Color(" + str(font[0]) + ", " + str(font[1]) + ", " + str(font[2]) + ")")
+    text.append(", scale=" + scale + ")\n")
     text += add_init()
     if txt.script != "":
-        text += "    \n"
+        text.append("    \n")
         for i in txt.script.split("\n"):
-            text += "    " + i + "\n"
-    return text
+            text.append("    " + i + "\n")
+    return "".join(text)
