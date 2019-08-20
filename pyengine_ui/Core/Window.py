@@ -9,12 +9,14 @@ from pyengine_ui.Core.Windows import LaunchWindow, InformationsWindow, ProjectWi
 from pyengine_ui.Core.Compilation import Compilation
 from pyengine_ui.Core.ScriptEditor import Editor
 
-from pyengine.Utils import Config
+from pyengine.Utils import Config, loggers
 
 
 class Window(QMainWindow):
     def __init__(self):
         super(Window, self).__init__()
+        loggers.create_logger("PyEngineUI", os.path.join(os.path.dirname(__file__), "..", "logs", "pyengineui.log"),
+                              True)
         self.project = Project()
         self.compil = Compilation(self.project)
 
