@@ -72,6 +72,16 @@ class PropertiesWidget(QWidget):
             elif p[1] == "file":
                 widget = QPushButton("Sélectionner")
                 widget.clicked.connect(lambda checked=False, prop=p[0]: self.set_file_for(prop))
+            elif p[1] == "fileNone":
+                widget = QWidget()
+                layout = QGridLayout()
+                select = QPushButton("Sélectionner")
+                select.clicked.connect(lambda checked=False, prop=p[0]: self.set_file_for(prop))
+                delete = QPushButton("Supprimer")
+                delete.clicked.connect(lambda checked=False, prop=p[0]: self.set_none_for(prop))
+                layout.addWidget(select, 0, 0)
+                layout.addWidget(delete, 0, 1)
+                widget.setLayout(layout)
             elif p[1] == "files":
                 widget = QPushButton("Sélectionner")
                 widget.clicked.connect(lambda checked=False, prop=p[0]: self.set_files_for(prop))
