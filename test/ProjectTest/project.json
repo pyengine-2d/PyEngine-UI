@@ -88,6 +88,18 @@
                                     "Childs": []
                                 }
                             ]
+                        },
+                        {
+                            "Type": "Selector",
+                            "Name": "Select",
+                            "Properties": {
+                                "Nom": "Select",
+                                "Position X": 200,
+                                "Position Y": 300,
+                                "Mots (s\u00e9par\u00e9 d'un -)": "Exemple1-Exemple2"
+                            },
+                            "Script": "",
+                            "Childs": []
                         }
                     ]
                 }
