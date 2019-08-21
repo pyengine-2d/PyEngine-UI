@@ -88,6 +88,101 @@ properties = {
         ["Images", "files", ""],
         ["Flip X", "bool", False],
         ["Flip Y", "bool", False]
+    ],
+    "AnimatedImage": [
+        ["Nom", "str", "AnimImage"],
+        ["Position X", "int", 0],
+        ["Position Y", "int", 0],
+        ["Images", "files", ""],
+        ["Timer", "int", 20],
+        ["Taille X", "int", 0],
+        ["Taille Y", "int", 0]
+    ],
+    "Button": [
+        ["Nom", "str", "Bouton"],
+        ["Position X", "int", 0],
+        ["Position Y", "int", 0],
+        ["Texte", "str", ""],
+        ["Commande", "str", ""],
+        ["Taille X", "int", 100],
+        ["Taille Y", "int", 40],
+        ["Image", "fileNone", None]
+    ],
+    "Checkbox": [
+        ["Nom", "str", "Boite"],
+        ["Position X", "int", 0],
+        ["Position Y", "int", 0],
+        ["Texte", "str", ""],
+        ["Coché", "bool", False],
+        ["Scale", "int", 1]
+    ],
+    "Console": [
+        ["Nom", "str", "Console"],
+        ["Position X", "int", 0],
+        ["Position Y", "int", 0],
+        ["Largeur", "int", 600]
+    ],
+    "Entry": [
+        ["Nom", "str", "Entrée"],
+        ["Position X", "int", 0],
+        ["Position Y", "int", 0],
+        ["Largeur", "int", 200],
+        ["Image", "fileNone", None],
+        ["Couleur", "color", [255, 255, 255]],
+        ["Nom Police", "str", "arial"],
+        ["Taille Police", "int", 15],
+        ["Italique", "bool", False],
+        ["Gras", "bool", False],
+        ["Souligné", "bool", False]
+    ],
+    "Image": [
+        ["Nom", "str", "Image"],
+        ["Position X", "int", 0],
+        ["Position Y", "int", 0],
+        ["Image", "file", ""],
+        ["Taille X", "int", 0],
+        ["Taille Y", "int", 0]
+    ],
+    "Label": [
+        ["Nom", "str", "Texte"],
+        ["Position X", "int", 0],
+        ["Position Y", "int", 0],
+        ["Texte", "str", ""],
+        ["Couleur", "color", [255, 255, 255]],
+        ["Font", "colorNone", None],
+        ["Nom Police", "str", "arial"],
+        ["Taille Police", "int", 15],
+        ["Italique", "bool", False],
+        ["Gras", "bool", False],
+        ["Souligné", "bool", False]
+    ],
+    "MultilineLabel": [
+        ["Nom", "str", "Texte"],
+        ["Position X", "int", 0],
+        ["Position Y", "int", 0],
+        ["Texte", "str", ""],
+        ["Couleur", "color", [255, 255, 255]],
+        ["Font", "colorNone", None],
+        ["Nom Police", "str", "arial"],
+        ["Taille Police", "int", 15],
+        ["Italique", "bool", False],
+        ["Gras", "bool", False],
+        ["Souligné", "bool", False]
+    ],
+    "ProgressBar": [
+        ["Nom", "str", "Texte"],
+        ["Position X", "int", 0],
+        ["Position Y", "int", 0],
+        ["Taille X", "int", 150],
+        ["Taille Y", "int", 10],
+        ["Image Fond", "fileNone", None],
+        ["Image Barre", "fileNone", None]
+    ],
+    "Selector": [
+        ["Nom", "str", "Selecteur"],
+        ["Position X", "int", 0],
+        ["Position Y", "int", 0],
+        ["Mots (séparé d'un -)", "str", "Exemple1-Exemple2"]
     ]
 }
 
@@ -102,7 +197,17 @@ parent = {
     "MoveComponent": ["Entity"],
     "ControlComponent": ["Entity"],
     "LifeComponent": ["Entity"],
-    "AnimComponent": ["Entity"]
+    "AnimComponent": ["Entity"],
+    "AnimatedImage": ["World"],
+    "Button": ["World"],
+    "Checkbox": ["World"],
+    "Console": ["World"],
+    "Entry": ["World"],
+    "Image": ["World"],
+    "Label": ["World"],
+    "MultilineLabel": ["World"],
+    "ProgressBar": ["World"],
+    "Selector": ["World"]
 }
 
 types = parent.keys()

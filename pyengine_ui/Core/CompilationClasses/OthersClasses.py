@@ -13,8 +13,12 @@ def world_class(self, world):
     text = ["from pyengine import World\n"]
     if len(world.childs):
         text.append("from pyengine.Systems import EntitySystem\n")
+        text.append("from pyengine.Systems import UISystem\n")
         for i in world.childs:
-            text.append("from Entities." + i.name.capitalize() + " import " + i.name + "\n")
+            if i.type_ in ["Entity", "Tilemap"]:
+                text.append("from Entities." + i.name.capitalize() + " import " + i.name + "\n")
+            else:
+                text.append("from Widgets." + i.name.capitalize() + " import " + i.name  + "\n")
     text += [
         "\n\nclass " + world.name + "(World):\n",
         "    def __init__(self, window):\n",
@@ -23,8 +27,14 @@ def world_class(self, world):
     text += add_init()
     if len(world.childs):
         text.append("        self.esys = self.get_system(EntitySystem)\n")
+        text.append("        self.uisys = self.get_system(UISystem)\n")
         for i in world.childs:
-            text.append("        self.esys.add_entity(" + i.name + "())\n")
+            if i.type_ in ["Entity", "Tilemap"]:
+                text.append("        self.esys.add_entity(" + i.name + "())\n")
+            elif i.type_ == "Console":
+                text.append("        self.uisys.add_widget(" + i.name + "(self.window))")
+            else:
+                text.append("        self.uisys.add_widget(" + i.name + "())\n")
     if world.script != "":
         text.append("    \n")
         for i in world.script.split("\n"):
