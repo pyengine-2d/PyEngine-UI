@@ -12,6 +12,12 @@ class Project:
         self.version = "0.0.1"
         self.objects = self.setup_objects()
 
+    def get_object(self, name=None):
+        for i in self.all_objects():
+            if i.name == name:
+                return i
+        return None
+
     def update_objects(self, item):
         self.set_childs(self.objects[0], item, self.all_objects())
 

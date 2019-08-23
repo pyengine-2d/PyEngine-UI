@@ -8,7 +8,6 @@ properties = {
         ["Icon", "file", ""],
         ["FPS Max", "int", 0],
         ["Update /s", "int", 60],
-        ["Debug", "bool", False]
         ["Debug", "bool", False],
         ["Monde Actuel", "str", "Monde"]
     ],
