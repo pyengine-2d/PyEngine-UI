@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QDialog, QGridLayout, QPushButton
-from PyQt5.QtCore import Qt
+from PySide2.QtWidgets import QDialog, QGridLayout, QPushButton
+from PySide2.QtCore import Qt
 
 from pyengine_ui.Core.Widgets import ListWidget, Label
 

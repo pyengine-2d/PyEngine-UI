@@ -1,8 +1,8 @@
 import os
 import sys
 
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication
+from PySide2.QtGui import QIcon
+from PySide2.QtWidgets import QApplication
 
 from pyengine_ui.Core.Window import Window
 

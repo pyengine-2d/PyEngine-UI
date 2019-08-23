@@ -1,7 +1,7 @@
 import os
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout, QPushButton, QFileDialog, QMessageBox
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QMainWindow, QWidget, QGridLayout, QPushButton, QFileDialog, QMessageBox
 
 from pyengine_ui.Core.Utils import parsetheme, Project, Object
 from pyengine_ui.Core.Widgets import Label, ElementsWidget, PropertiesWidget

@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QTreeWidget, QTreeWidgetItem
+from PySide2.QtWidgets import QTreeWidget, QTreeWidgetItem
 
 
 class ListWidget(QTreeWidget):

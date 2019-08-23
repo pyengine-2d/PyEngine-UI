@@ -21,4 +21,4 @@ UI for PyEngine
     - 3.7.1 (V 0.1.0-DEV --> Latest)
   - Library :
     - PyEngine 1.5.1 (V 0.1.0-DEV --> Latest)
-    - PyQt5 5.13.0 (V 0.1.0-DEV --> Latest)
+    - PySide2 5.13.0 (V 0.1.0-DEV --> Latest)

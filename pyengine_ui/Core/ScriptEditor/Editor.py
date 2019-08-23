@@ -1,6 +1,6 @@
 import webbrowser
 
-from PyQt5.QtWidgets import QMainWindow, QGridLayout, QMessageBox, QWidget
+from PySide2.QtWidgets import QMainWindow, QGridLayout, QMessageBox, QWidget
 
 from pyengine_ui.Core.ScriptEditor.EditorWidget import EditorWidget
 

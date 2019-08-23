@@ -37,5 +37,5 @@ setup(
             'pyengine = pyengine_ui.pyengine_app:launch',
         ],
     },
-    install_requires=['PyEngine-2D>=1.6.0', 'PyQt5']
+    install_requires=['PyEngine-2D>=1.6.0', 'PySide2']
 )

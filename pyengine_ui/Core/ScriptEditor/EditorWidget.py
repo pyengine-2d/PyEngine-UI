@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QPlainTextEdit, QTextEdit
-from PyQt5.QtCore import QRect, Qt
-from PyQt5.QtGui import QColor, QTextFormat, QPainter
+from PySide2.QtWidgets import QPlainTextEdit, QTextEdit
+from PySide2.QtCore import QRect, Qt
+from PySide2.QtGui import QColor, QTextFormat, QPainter
 
 from pyengine_ui.Core.ScriptEditor.LineAreaWidget import LineAreaWidget
 from pyengine_ui.Core.ScriptEditor.Highlighter import Highlighter

@@ -1,9 +1,9 @@
 import os
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QGridLayout, QSpacerItem, QLineEdit, QCheckBox, QSpinBox, QPushButton, \
-    QFileDialog, QSizePolicy, QComboBox, QColorDialog
-from PyQt5.QtGui import QColor
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import (QWidget, QGridLayout, QSpacerItem, QLineEdit, QCheckBox, QSpinBox, QPushButton,
+                               QFileDialog, QSizePolicy, QComboBox, QColorDialog)
+from PySide2.QtGui import QColor
 
 from pyengine_ui.Core.Utils import get_properties
 from pyengine_ui.Core.Widgets import Label
