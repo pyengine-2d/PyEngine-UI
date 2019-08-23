@@ -20,7 +20,8 @@
                 "Icon": "",
                 "FPS Max": 0,
                 "Update /s": 60,
-                "Debug": false
+                "Debug": false,
+                "Monde Actuel": "Monde"
             },
             "Script": "",
             "Childs": [

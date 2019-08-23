@@ -48,6 +48,7 @@ def window_class(compil, window):
     color = window.properties["Couleur"]
     titre = str(window.properties["Titre"])
     icon = str(window.properties["Icon"])
+    current = str(window.properties["Monde Actuel"])
     if window.properties["FPS Max"] == 0:
         fps = str(None)
     else:
@@ -82,7 +83,7 @@ def window_class(compil, window):
         i = None
         for i in window.childs:
             text.append("        self." + i.name.lower() + " = " + i.name + "(self)\n")
-        text.append("        self.world = self." + i.name.lower() + "\n")
+        text.append("        self.world = self." + current.lower() + "\n")
     text.append("        self.run()\n")
     if window.script != "":
         text.append("    \n")

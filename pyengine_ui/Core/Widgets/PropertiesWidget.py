@@ -113,6 +113,8 @@ class PropertiesWidget(QWidget):
     def set_text_for(self, text, prop):
         self.obj.set_property(prop, text)
         if prop == "Nom":
+            if self.parent.project.objects[0].properties["Monde Actuel"] == self.obj.name:
+                self.parent.project.objects[0].properties["Monde Actuel"] = text
             element = self.parent.elements.get_item(self.obj.name)
             if element is not None:
                 element.setText(0, text)

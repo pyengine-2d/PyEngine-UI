@@ -110,6 +110,8 @@ class Window(QMainWindow):
                     if v.parent is None:
                         QMessageBox.warning(self, "PyEngine - Erreur", "Vous ne pouvez pas supprimer la fenêtre.")
                     else:
+                        if v.name == self.project.objects[0].properties["Monde Actuel"]:
+                            self.project.objects[0].properties["Monde Actuel"] = ""
                         v.parent.childs.remove(v)
                 self.elements.update_items()
         elif type_ == "compile":
