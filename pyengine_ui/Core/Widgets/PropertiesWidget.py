@@ -149,7 +149,6 @@ class PropertiesWidget(QWidget):
         else:
             qcolor = QColorDialog.getColor()
         self.obj.set_property(prop, [qcolor.red(), qcolor.green(), qcolor.blue()])
-        print(prop, [qcolor.red(), qcolor.green(), qcolor.blue()])
         self.parent.affichage.update_screen()
 
 
