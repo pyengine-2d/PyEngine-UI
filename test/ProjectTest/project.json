@@ -36,67 +36,158 @@
                     "Script": "",
                     "Childs": [
                         {
-                            "Type": "Entity",
-                            "Name": "E",
+                            "Type": "Label",
+                            "Name": "Label",
                             "Properties": {
-                                "Nom": "E"
+                                "Nom": "Label",
+                                "Position X": 525,
+                                "Position Y": 525,
+                                "Texte": "Mamadou !",
+                                "Couleur": [
+                                    255,
+                                    0,
+                                    4
+                                ],
+                                "Font": null,
+                                "Nom Police": "arial",
+                                "Taille Police": 26,
+                                "Italique": true,
+                                "Gras": true,
+                                "Soulign\u00e9": true
                             },
                             "Script": "",
-                            "Childs": [
-                                {
-                                    "Type": "PositionComponent",
-                                    "Name": "Pos",
-                                    "Properties": {
-                                        "Nom": "Pos",
-                                        "Position X": 100,
-                                        "Position Y": 217,
-                                        "Offset X": 0,
-                                        "Offset Y": 0
-                                    },
-                                    "Script": "",
-                                    "Childs": []
-                                },
-                                {
-                                    "Type": "AnimComponent",
-                                    "Name": "Anim",
-                                    "Properties": {
-                                        "Nom": "Anim",
-                                        "Timer": 20,
-                                        "Images": [
-                                            "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/idle.png",
-                                            "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/sprite0.png",
-                                            "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/test.gif"
-                                        ],
-                                        "Flip X": false,
-                                        "Flip Y": false
-                                    },
-                                    "Script": "",
-                                    "Childs": []
-                                },
-                                {
-                                    "Type": "SpriteComponent",
-                                    "Name": "Sprite",
-                                    "Properties": {
-                                        "Nom": "Sprite",
-                                        "Image": "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/sprite0.png",
-                                        "Scale": 2,
-                                        "Rotation": 0,
-                                        "Flip X": false,
-                                        "Flip Y": false
-                                    },
-                                    "Script": "",
-                                    "Childs": []
-                                }
-                            ]
+                            "Childs": []
                         },
                         {
                             "Type": "Selector",
-                            "Name": "Select",
+                            "Name": "Selector",
                             "Properties": {
-                                "Nom": "Select",
-                                "Position X": 200,
+                                "Nom": "Selector",
+                                "Position X": 101,
+                                "Position Y": 100,
+                                "Mots (s\u00e9par\u00e9 d'un -)": "Michel-Alexis"
+                            },
+                            "Script": "",
+                            "Childs": []
+                        },
+                        {
+                            "Type": "ProgressBar",
+                            "Name": "Progress",
+                            "Properties": {
+                                "Nom": "Progress",
+                                "Position X": 400,
+                                "Position Y": 100,
+                                "Taille X": 200,
+                                "Taille Y": 20,
+                                "Image Fond": null,
+                                "Image Barre": null
+                            },
+                            "Script": "",
+                            "Childs": []
+                        },
+                        {
+                            "Type": "MultilineLabel",
+                            "Name": "Multiline",
+                            "Properties": {
+                                "Nom": "Multiline",
+                                "Position X": 500,
                                 "Position Y": 300,
-                                "Mots (s\u00e9par\u00e9 d'un -)": "Exemple1-Exemple2"
+                                "Texte": "Ceci est un test\\nnan ?\\nMoi je suis d'accord !",
+                                "Couleur": [
+                                    70,
+                                    169,
+                                    255
+                                ],
+                                "Font": null,
+                                "Nom Police": "arial",
+                                "Taille Police": 20,
+                                "Italique": false,
+                                "Gras": false,
+                                "Soulign\u00e9": false
+                            },
+                            "Script": "",
+                            "Childs": []
+                        },
+                        {
+                            "Type": "Entry",
+                            "Name": "Entry",
+                            "Properties": {
+                                "Nom": "Entry",
+                                "Position X": 10,
+                                "Position Y": 500,
+                                "Largeur": 200,
+                                "Image": null,
+                                "Couleur": [
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "Nom Police": "arial",
+                                "Taille Police": 15,
+                                "Italique": false,
+                                "Gras": false,
+                                "Soulign\u00e9": false
+                            },
+                            "Script": "",
+                            "Childs": []
+                        },
+                        {
+                            "Type": "Console",
+                            "Name": "Console",
+                            "Properties": {
+                                "Nom": "Console",
+                                "Position X": 200,
+                                "Position Y": 700,
+                                "Largeur": 500
+                            },
+                            "Script": "",
+                            "Childs": []
+                        },
+                        {
+                            "Type": "Checkbox",
+                            "Name": "Check",
+                            "Properties": {
+                                "Nom": "Check",
+                                "Position X": 500,
+                                "Position Y": 200,
+                                "Texte": "Mamadou",
+                                "Coch\u00e9": false,
+                                "Scale": 1
+                            },
+                            "Script": "",
+                            "Childs": []
+                        },
+                        {
+                            "Type": "Button",
+                            "Name": "Button",
+                            "Properties": {
+                                "Nom": "Button",
+                                "Position X": 800,
+                                "Position Y": 600,
+                                "Texte": "OUI",
+                                "Commande": "",
+                                "Taille X": 100,
+                                "Taille Y": 40,
+                                "Image": null
+                            },
+                            "Script": "",
+                            "Childs": []
+                        },
+                        {
+                            "Type": "AnimatedImage",
+                            "Name": "Anim",
+                            "Properties": {
+                                "Nom": "Anim",
+                                "Position X": 100,
+                                "Position Y": 200,
+                                "Images": [
+                                    "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/sprite0.png",
+                                    "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/sprite1.png",
+                                    "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/test.gif"
+                                ],
+                                "Timer": 20,
+                                "Taille X": 50,
+                                "Taille Y": 50
                             },
                             "Script": "",
                             "Childs": []
