@@ -114,7 +114,7 @@ def label_class(compil, la):
         "    def __init__(self):\n",
         "        super(" + la.name + ", self).__init__(Vec2(" + posx + ", " + posy + '), "' + texte +
         '", Color(' + str(color[0]) + ", " + str(color[1]) + ", " + str(color[2]) + '), Font("' + npolice +
-        '", ' + tpolice + ", " + ipolice + ", " + gpolice + ", " + spolice
+        '", ' + tpolice + ", " + gpolice + ", " + ipolice + ", " + spolice
     ]
     if font is not None:
         text.append(", Color(" + str(font[0]) + ", " + str(font[1]) + ", " + str(font[2]) + ")")
