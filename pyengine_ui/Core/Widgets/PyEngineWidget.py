@@ -1,16 +1,9 @@
 from PySide2.QtWidgets import QWidget
 from PySide2.QtGui import QImage, QPainter
 
+from pyengine_ui.Core.Utils.PyEngineUtils import *
+
 import pygame
-
-
-class Entity(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        pos = [0, 0]
-        sprite = ""
-        image = None
-        rect = None
 
 
 class PyEngineWidget(QWidget):
@@ -28,30 +21,50 @@ class PyEngineWidget(QWidget):
         screen = pygame.Surface((window.properties["Largeur"], window.properties["Hauteur"]))
         screen.fill(window.properties["Couleur"])
 
-        sprites = pygame.sprite.Group()
+        entities = pygame.sprite.Group()
+        widgets = pygame.sprite.Group()
         world = self.parent.project.get_object(window.properties["Monde Actuel"])
 
         for i in world.childs:
             if i.type_ == "Entity":
-                entity = Entity()
-                for j in i.childs:
-                    if j.type_ == "PositionComponent":
-                        entity.pos = [j.properties["Position X"], j.properties["Position Y"]]
-                    elif j.type_ == "SpriteComponent":
-                        entity.sprite = j.properties["Image"]
-                        entity.image = pygame.image.load(j.properties["Image"])
-                        entity.image = pygame.transform.flip(entity.image, j.properties["Flip X"],
-                                                                 j.properties["Flip Y"])
-                        sizescaled = (entity.image.get_rect().width * j.properties["Scale"],
-                                      entity.image.get_rect().height * j.properties["Scale"])
-                        entity.image = pygame.transform.scale(entity.image, sizescaled)
-                        entity.image = pygame.transform.rotate(entity.image, j.properties["Rotation"])
-                sprites.add(entity)
+                entities.add(create_entity(i))
+            elif i.type_ == "Label":
+                widgets.add(create_label(i))
+            elif i.type_ == "Selector":
+                selector = create_selector(i)
+                widgets.add(selector.bprecedent)
+                widgets.add(selector.bprecedent.label)
+                widgets.add(selector.label)
+                widgets.add(selector.bnext)
+                widgets.add(selector.bnext.label)
+            elif i.type_ == "ProgressBar":
+                widgets.add(create_progress(i))
+            elif i.type_ == "MultilineLabel":
+                multiline = create_multiline(i)
+                for label in multiline.labels:
+                    widgets.add(label)
+            elif i.type_ == "Entry":
+                widgets.add(create_entry(i))
+            elif i.type_ == "Console":
+                console = create_console(i)
+                widgets.add(console)
+                widgets.add(console.retour)
+            elif i.type_ == "Checkbox":
+                check = create_checkbox(i)
+                widgets.add(check)
+                widgets.add(check.label)
+            elif i.type_ == "Button":
+                button = create_button(i)
+                widgets.add(button)
+                widgets.add(button.label)
+            elif i.type_ == "AnimatedImage":
+                widgets.add(create_anim(i))
 
-        for i in sprites:
+        for i in entities:
             i.rect = i.image.get_rect(center=i.pos)
 
-        sprites.draw(screen)
+        entities.draw(screen)
+        widgets.draw(screen)
 
         w = screen.get_width()
         h = screen.get_height()
