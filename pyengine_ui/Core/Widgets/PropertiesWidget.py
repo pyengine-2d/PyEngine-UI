@@ -108,6 +108,7 @@ class PropertiesWidget(QWidget):
         if self.obj.type_ != "None":
             self.parent.editor = Editor(self.parent, self.obj)
             self.parent.editor.showMaximized()
+        self.parent.affichage.update_screen()
 
     def set_text_for(self, text, prop):
         self.obj.set_property(prop, text)
@@ -116,29 +117,37 @@ class PropertiesWidget(QWidget):
             if element is not None:
                 element.setText(0, text)
                 self.obj.name = text
+        self.parent.affichage.update_screen()
 
     def set_bool_for(self, state, prop):
         self.obj.set_property(prop, bool(state))
+        self.parent.affichage.update_screen()
 
     def set_int_for(self, value, prop):
         self.obj.set_property(prop, value)
+        self.parent.affichage.update_screen()
 
     def set_none_for(self, prop):
         self.obj.set_property(prop, None)
+        self.parent.affichage.update_screen()
 
     def set_file_for(self, prop):
         directory = os.environ.get('HOME', os.environ.get('USERPROFILE', os.path.dirname(__file__)))
         self.obj.set_property(prop, QFileDialog.getOpenFileName(self, "Fichier : "+prop, directory)[0])
+        self.parent.affichage.update_screen()
 
     def set_files_for(self, prop):
         directory = os.environ.get('HOME', os.environ.get('USERPROFILE', os.path.dirname(__file__)))
         self.obj.set_property(prop, QFileDialog.getOpenFileNames(self, "Fichiers : "+prop, directory)[0])
+        self.parent.affichage.update_screen()
 
     def set_color_for(self, prop):
         if self.obj.properties[prop] is not None:
             qcolor = QColorDialog.getColor(QColor(*self.obj.properties[prop]))
         else:
             qcolor = QColorDialog.getColor()
-        self.obj.set_property(prop, qcolor.getRgb())
+        self.obj.set_property(prop, [qcolor.red(), qcolor.green(), qcolor.blue()])
+        print(prop, [qcolor.red(), qcolor.green(), qcolor.blue()])
+        self.parent.affichage.update_screen()
 
 

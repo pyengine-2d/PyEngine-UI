@@ -2,14 +2,13 @@ import os
 
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QMainWindow, QWidget, QGridLayout, QPushButton, QFileDialog, QMessageBox
+from pyengine.Utils import Config, loggers
 
-from pyengine_ui.Core.Utils import parsetheme, Project, Object
-from pyengine_ui.Core.Widgets import Label, ElementsWidget, PropertiesWidget
-from pyengine_ui.Core.Windows import LaunchWindow, InformationsWindow, ProjectWindow, ThemesWindow, AddElementWindow
 from pyengine_ui.Core.Compilation import Compilation
 from pyengine_ui.Core.ScriptEditor import Editor
-
-from pyengine.Utils import Config, loggers
+from pyengine_ui.Core.Utils import parsetheme, Project, Object
+from pyengine_ui.Core.Widgets import ElementsWidget, PropertiesWidget, PyEngineWidget
+from pyengine_ui.Core.Windows import LaunchWindow, InformationsWindow, ProjectWindow, ThemesWindow, AddElementWindow
 
 
 class Window(QMainWindow):
@@ -30,7 +29,7 @@ class Window(QMainWindow):
         self.elements = ElementsWidget(self)
         self.elementdeleter = QPushButton("Supprimer")
         self.elementadder = QPushButton("Ajouter")
-        self.laffichage = Label("Affichage du Projet", 15)
+        self.affichage = PyEngineWidget(self)
 
         self.properties = PropertiesWidget(self, Object("Aucun", "None"))
 
@@ -70,6 +69,7 @@ class Window(QMainWindow):
         if os.path.exists(os.path.join(directory, "project.json")):
             self.project.load(os.path.join(directory, "project.json"))
             self.elements.update_items()
+        self.affichage.update_screen()
 
     def applytheme(self):
         if self.theme == "" or self.theme == os.path.join(os.path.dirname(__file__), "..", "Themes"):
@@ -141,14 +141,13 @@ class Window(QMainWindow):
         layout_left.addWidget(self.elementadder, 1, 1)
         self.grid.addLayout(layout_left, 0, 0)
 
-        self.laffichage.setAlignment(Qt.AlignHCenter)
-        self.grid.addWidget(self.laffichage, 0, 1)
+        self.grid.addWidget(self.affichage, 0, 1)
 
         self.grid.addWidget(self.properties, 0, 2)
 
-        self.grid.setColumnStretch(0, 2)
+        self.grid.setColumnStretch(0, 1)
         self.grid.setColumnStretch(1, 3)
-        self.grid.setColumnStretch(2, 2)
+        self.grid.setColumnStretch(2, 1)
         self.grid.setContentsMargins(0, 0, 0, 0)
         self.grid.setSpacing(0)
         self.setCentralWidget(self.centralWidget)

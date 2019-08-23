@@ -9,13 +9,12 @@
             "Name": "Fenetre",
             "Properties": {
                 "Nom": "Fenetre",
-                "Largeur": 900,
-                "Hauteur": 600,
+                "Largeur": 1100,
+                "Hauteur": 800,
                 "Couleur": [
-                    255,
-                    255,
-                    255,
-                    255
+                    0,
+                    0,
+                    0
                 ],
                 "Titre": "PyEngine Game",
                 "Icon": "",

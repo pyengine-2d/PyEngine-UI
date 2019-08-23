@@ -71,3 +71,4 @@ class ElementsWidget(QTreeWidget):
         self.parent.properties.deleteLater()
         self.parent.properties = PropertiesWidget(self.parent, obj)
         self.parent.grid.addWidget(self.parent.properties, 0, 2)
+        self.parent.affichage.update_screen()
