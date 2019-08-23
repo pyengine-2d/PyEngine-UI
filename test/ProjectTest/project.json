@@ -49,23 +49,9 @@
                                     "Properties": {
                                         "Nom": "Pos",
                                         "Position X": 100,
-                                        "Position Y": 200,
+                                        "Position Y": 217,
                                         "Offset X": 0,
                                         "Offset Y": 0
-                                    },
-                                    "Script": "",
-                                    "Childs": []
-                                },
-                                {
-                                    "Type": "SpriteComponent",
-                                    "Name": "Sprite",
-                                    "Properties": {
-                                        "Nom": "Sprite",
-                                        "Image": "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/sprite0.png",
-                                        "Scale": 1,
-                                        "Rotation": 0,
-                                        "Flip X": false,
-                                        "Flip Y": false
                                     },
                                     "Script": "",
                                     "Childs": []
@@ -81,6 +67,20 @@
                                             "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/sprite0.png",
                                             "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/test.gif"
                                         ],
+                                        "Flip X": false,
+                                        "Flip Y": false
+                                    },
+                                    "Script": "",
+                                    "Childs": []
+                                },
+                                {
+                                    "Type": "SpriteComponent",
+                                    "Name": "Sprite",
+                                    "Properties": {
+                                        "Nom": "Sprite",
+                                        "Image": "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/sprite0.png",
+                                        "Scale": 2,
+                                        "Rotation": 0,
                                         "Flip X": false,
                                         "Flip Y": false
                                     },
