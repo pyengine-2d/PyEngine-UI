@@ -30,8 +30,8 @@ def progress_class(compil, prog):
     posy = str(prog.properties["Position Y"])
     sizex = str(prog.properties["Taille X"])
     sizey = str(prog.properties["Taille Y"])
-    imf = str(prog.properties["Image Fond"])
-    imb = str(prog.properties["Image Barre"])
+    imf = prog.properties["Image Fond"]
+    imb = prog.properties["Image Barre"]
 
     if imf is not None and imf != "":
         directory = os.path.join(compil.project.project_folder, compil.project.project_name)
@@ -78,12 +78,12 @@ def multiline_class(compil, mll):
     spolice = str(mll.properties["Souligné"])
 
     text = [
-        "from pyengine.Widgets import MultilineLabel\nfrom pyengine.Utils import Vec2, Color\n\n\n",
-        "class " + mll.name + "(MutlilineLabel):\n",
+        "from pyengine.Widgets import MultilineLabel\nfrom pyengine.Utils import Vec2, Color, Font\n\n\n",
+        "class " + mll.name + "(MultilineLabel):\n",
         "    def __init__(self):\n",
         "        super(" + mll.name + ", self).__init__(Vec2(" + posx + ", " + posy + '), "' + texte +
         '", Color(' + str(color[0]) + ", " + str(color[1]) + ", " + str(color[2]) + '), Font("' + npolice +
-        '", ' + tpolice + ", " + ipolice + ", " + gpolice + ", " + spolice
+        '", ' + tpolice + ", " + ipolice + ", " + gpolice + ", " + spolice + ")"
     ]
     if font is not None:
         text.append(", Color(" + str(font[0]) + ", " + str(font[1]) + ", " + str(font[2]) + ")")
@@ -109,12 +109,12 @@ def label_class(compil, la):
     spolice = str(la.properties["Souligné"])
 
     text = [
-        "from pyengine.Widgets import Label\nfrom pyengine.Utils import Vec2, Color\n\n\n",
+        "from pyengine.Widgets import Label\nfrom pyengine.Utils import Vec2, Color, Font\n\n\n",
         "class " + la.name + "(Label):\n",
         "    def __init__(self):\n",
         "        super(" + la.name + ", self).__init__(Vec2(" + posx + ", " + posy + '), "' + texte +
         '", Color(' + str(color[0]) + ", " + str(color[1]) + ", " + str(color[2]) + '), Font("' + npolice +
-        '", ' + tpolice + ", " + gpolice + ", " + ipolice + ", " + spolice
+        '", ' + tpolice + ", " + gpolice + ", " + ipolice + ", " + spolice + ")"
     ]
     if font is not None:
         text.append(", Color(" + str(font[0]) + ", " + str(font[1]) + ", " + str(font[2]) + ")")
@@ -162,7 +162,7 @@ def entry_class(compil, ent):
     posx = str(ent.properties["Position X"])
     posy = str(ent.properties["Position Y"])
     wid = str(ent.properties["Largeur"])
-    image = str(ent.properties["Image"])
+    image = ent.properties["Image"]
     color = ent.properties["Couleur"]
     npolice = str(ent.properties["Nom Police"])
     tpolice = str(ent.properties["Taille Police"])
@@ -178,17 +178,16 @@ def entry_class(compil, ent):
         image = "Images/" + filename
 
     text = [
-        "from pyengine.Widgets import Entry\nfrom pyengine.Utils import Vec2, Color\n\n\n",
+        "from pyengine.Widgets import Entry\nfrom pyengine.Utils import Vec2, Color, Font\n\n\n",
         "class " + ent.name + "(Entry):\n",
         "    def __init__(self):\n",
         "        super(" + ent.name + ", self).__init__(Vec2(" + posx + ", " + posy + "), " + wid
     ]
     if image is not None and image != "":
         text.append(', "' + image + '"')
-    text += [
-        ", color=Color(" + str(color[0]) + ", " + str(color[1]) + ", " + str(color(2)) + '), font=Font("' + npolice +
-        '", ' + tpolice + ", " + ipolice + ", " + gpolice + ", " + spolice + ")\n"
-    ]
+    text.append(", color=Color(" + str(color[0]) + ", " + str(color[1]) + ", " + str(color[2]) +
+                '), font=Font("' + npolice + '", ' + tpolice + ", " + ipolice + ", " + gpolice +
+                ", " + spolice + "))\n")
     text += add_init()
     if ent.script != "":
         text.append("    \n")
@@ -227,8 +226,8 @@ def check_class(compil, che):
         "from pyengine.Widgets import Checkbox\nfrom pyengine.Utils import Vec2\n\n\n",
         "class " + che.name + "(Checkbox):\n",
         "    def __init__(self):\n",
-        "        super(" + che.name + ", self).__init__(Vec2(" + posx + ", " + posy + "), " + text+ ", " + check + ", "
-        + scale + ")\n"
+        "        super(" + che.name + ", self).__init__(Vec2(" + posx + ", " + posy + '), "' + text + '", ' + check +
+        ", " + scale + ")\n"
     ]
     text += add_init()
     if che.script != "":
@@ -256,9 +255,9 @@ def button_class(compil, but):
 
     text = [
         "from pyengine.Widgets import Button\nfrom pyengine.Utils import Vec2\n\n\n",
-        "class " + but.name + "(Buttton):\n",
+        "class " + but.name + "(Button):\n",
         "    def __init__(self):\n",
-        "        super(" + but.name + ", self).__init__(Vec2(" + posx + ", " + posy + "), " + text + ", size=Vec2(" +
+        "        super(" + but.name + ", self).__init__(Vec2(" + posx + ", " + posy + '), "' + text + '", size=Vec2(' +
         sizex + ", " + sizey + ")"
     ]
     if image is not None and image != "":

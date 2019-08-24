@@ -32,7 +32,7 @@ def world_class(self, world):
             if i.type_ in ["Entity", "Tilemap"]:
                 text.append("        self.esys.add_entity(" + i.name + "())\n")
             elif i.type_ == "Console":
-                text.append("        self.uisys.add_widget(" + i.name + "(self.window))")
+                text.append("        self.uisys.add_widget(" + i.name + "(self.window))\n")
             else:
                 text.append("        self.uisys.add_widget(" + i.name + "())\n")
     if world.script != "":
