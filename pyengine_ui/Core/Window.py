@@ -1,5 +1,7 @@
 import os
 
+import subprocess
+
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QMainWindow, QWidget, QGridLayout, QPushButton, QFileDialog, QMessageBox
 from pyengine.Utils import Config, loggers
@@ -118,7 +120,8 @@ class Window(QMainWindow):
         elif type_ == "run":
             self.compil.compile()
             os.chdir(os.path.join(self.project.project_folder, self.project.project_name))
-            os.system("python "+os.path.join(self.project.project_folder, self.project.project_name, "Main.py"))
+            subprocess.run(["python", os.path.join(self.project.project_folder, self.project.project_name, "Main.py")],
+                           capture_output=True)
 
     def setup_ui(self):
         project = self.menuBar().addMenu("Projet")
