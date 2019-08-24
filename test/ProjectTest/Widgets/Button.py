@@ -1,10 +1,10 @@
-from pyengine.Widgets import Selector
+from pyengine.Widgets import Button
 from pyengine.Utils import Vec2
 
 
-class Select(Selector):
+class Button(Button):
     def __init__(self):
-        super(Select, self).__init__(Vec2(200, 300), ['Exemple1', 'Exemple2'])
+        super(Button, self).__init__(Vec2(800, 600), "OUI", size=Vec2(100, 40))
         try:
             self.init()
         except AttributeError:

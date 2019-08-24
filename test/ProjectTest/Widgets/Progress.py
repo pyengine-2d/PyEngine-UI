@@ -1,10 +1,10 @@
-from pyengine.Components import PositionComponent
+from pyengine.Widgets import ProgressBar
 from pyengine.Utils import Vec2
 
 
-class Pos(PositionComponent):
+class Progress(ProgressBar):
     def __init__(self):
-        super(Pos, self).__init__(Vec2(100, 200), Vec2(0, 0))
+        super(Progress, self).__init__(Vec2(400, 100), Vec2(200, 20))
         try:
             self.init()
         except AttributeError:
