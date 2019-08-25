@@ -191,6 +191,20 @@
                             },
                             "Script": "",
                             "Childs": []
+                        },
+                        {
+                            "Type": "Image",
+                            "Name": "Image",
+                            "Properties": {
+                                "Nom": "Image",
+                                "Position X": 700,
+                                "Position Y": 100,
+                                "Image": "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/idle.png",
+                                "Taille X": 0,
+                                "Taille Y": 0
+                            },
+                            "Script": "",
+                            "Childs": []
                         }
                     ]
                 }

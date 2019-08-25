@@ -10,6 +10,7 @@ from Widgets.Console import Console
 from Widgets.Check import Check
 from Widgets.Button import Button
 from Widgets.Anim import Anim
+from Widgets.Image import Image
 
 
 class Monde(World):
@@ -30,3 +31,4 @@ class Monde(World):
         self.uisys.add_widget(Check())
         self.uisys.add_widget(Button())
         self.uisys.add_widget(Anim())
+        self.uisys.add_widget(Image())
