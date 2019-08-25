@@ -152,7 +152,7 @@ def create_anim(obj):
     timer = obj.properties["Timer"]
     sizex = obj.properties["Taille X"]
     sizey = obj.properties["Taille Y"]
-    if sizex is None or sizey is None:
+    if sizex == 0 or sizey == 0:
         return AnimatedImage(Vec2(posx, posy), images, timer)
     else:
         return AnimatedImage(Vec2(posx, posy), images, timer, Vec2(sizex, sizey))
