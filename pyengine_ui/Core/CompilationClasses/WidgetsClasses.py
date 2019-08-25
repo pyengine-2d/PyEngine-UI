@@ -145,9 +145,9 @@ def image_class(compil, im):
         "from pyengine.Widgets import Image\nfrom pyengine.Utils import Vec2\n\n\n",
         "class " + im.name + "(Image):\n",
         "    def __init__(self):\n",
-        "        super(" + im.name + ", self).__init__(Vec2(" + posx + ", " + posy + '), "' + image
+        "        super(" + im.name + ", self).__init__(Vec2(" + posx + ", " + posy + '), "' + image + '"'
     ]
-    if sizex != 0 and sizey != 0:
+    if sizex != "0" and sizey != "0":
         text.append(", Vec2(" + sizex + ", " + sizey + ")")
     text.append(")\n")
     text += add_init()
@@ -297,7 +297,7 @@ def animated_class(compil, anim):
         "        super(" + anim.name + ", self).__init__(Vec2(" + posx + ", " + posy + "), " + str(sprites) + ", " +
         timer
     ]
-    if sizex != 0 and sizey != 0:
+    if sizex != "0" and sizey != "0":
         text.append(", Vec2(" + sizex + ", " + sizey + ")")
     text.append(")\n")
     text += add_init()
