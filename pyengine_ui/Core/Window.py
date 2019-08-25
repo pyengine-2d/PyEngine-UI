@@ -120,8 +120,7 @@ class Window(QMainWindow):
         elif type_ == "run":
             self.compil.compile()
             os.chdir(os.path.join(self.project.project_folder, self.project.project_name))
-            subprocess.run(["python", os.path.join(self.project.project_folder, self.project.project_name, "Main.py")],
-                           capture_output=True)
+            subprocess.run(["python", os.path.join(self.project.project_folder, self.project.project_name, "Main.py")])
 
     def setup_ui(self):
         project = self.menuBar().addMenu("Projet")
