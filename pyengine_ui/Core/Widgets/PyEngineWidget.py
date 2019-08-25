@@ -30,6 +30,8 @@ class PyEngineWidget(QWidget):
                 entities.add(create_entity(i))
             elif i.type_ == "Label":
                 widgets.add(create_label(i))
+            elif i.type_ == "Image":
+                widgets.add(create_image(i))
             elif i.type_ == "Selector":
                 selector = create_selector(i)
                 widgets.add(selector.bprecedent)

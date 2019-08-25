@@ -31,6 +31,18 @@ def create_entity(obj):
     return entity
 
 
+def create_image(obj):
+    image = obj.properties["Image"]
+    posx = obj.properties["Position X"]
+    posy = obj.properties["Position Y"]
+    sizex = obj.properties["Taille X"]
+    sizey = obj.properties["Taille Y"]
+    if sizex != 0 and sizey != 0:
+        return Image(Vec2(posx, posy), image, Vec2(sizex, sizey))
+    else:
+        return Image(Vec2(posx, posy), image)
+
+
 def create_label(obj):
     posx = obj.properties["Position X"]
     posy = obj.properties["Position Y"]
