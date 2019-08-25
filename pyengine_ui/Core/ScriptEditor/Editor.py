@@ -14,9 +14,7 @@ class Editor(QMainWindow):
         self.centralWidget = QWidget()
         self.grid = QGridLayout(self.centralWidget)
 
-        self.script = self.menuBar().addMenu("Script")
-        self.script.addAction("Sauvegarder", self.save)
-        self.script.addAction("Vérifier")
+        self.script = self.menuBar().addAction("Sauvegarder", self.save)
 
         self.doc = self.menuBar().addAction("Documentation", self.get_doc)
 
