@@ -42,7 +42,7 @@
                                 "Nom": "Label",
                                 "Position X": 525,
                                 "Position Y": 525,
-                                "Texte": "Mamadou !",
+                                "Texte": "Mamadou",
                                 "Couleur": [
                                     255,
                                     0,
@@ -63,11 +63,11 @@
                             "Name": "Selector",
                             "Properties": {
                                 "Nom": "Selector",
-                                "Position X": 101,
-                                "Position Y": 100,
+                                "Position X": 108,
+                                "Position Y": 80,
                                 "Mots (s\u00e9par\u00e9 d'un -)": "Michel-Alexis"
                             },
-                            "Script": "",
+                            "Script": "def init(self):\n    from pyengine.Utils import Colors\n    self.label.color = Colors.WHITE.value",
                             "Childs": []
                         },
                         {
@@ -202,6 +202,42 @@
                                 "Image": "D:/Programmation/Python/Projet/pyengine/PyEngine/test/images/idle.png",
                                 "Taille X": 0,
                                 "Taille Y": 0
+                            },
+                            "Script": "",
+                            "Childs": []
+                        },
+                        {
+                            "Type": "Entry",
+                            "Name": "Entry2",
+                            "Properties": {
+                                "Nom": "Entry2",
+                                "Position X": 0,
+                                "Position Y": 0,
+                                "Largeur": 200,
+                                "Image": null,
+                                "Couleur": [
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "Nom Police": "arial",
+                                "Taille Police": 15,
+                                "Italique": false,
+                                "Gras": false,
+                                "Soulign\u00e9": false
+                            },
+                            "Script": "",
+                            "Childs": []
+                        },
+                        {
+                            "Type": "Tilemap",
+                            "Name": "Tile",
+                            "Properties": {
+                                "Nom": "Tile",
+                                "Position X": 400,
+                                "Position Y": 300,
+                                "Fichier JSON": "D:/Programmation/Python/Projet/AVNP/A-Very-Normal-Platformer-For-Sure/Levels/L1/level.json",
+                                "Scale": 1
                             },
                             "Script": "",
                             "Childs": []

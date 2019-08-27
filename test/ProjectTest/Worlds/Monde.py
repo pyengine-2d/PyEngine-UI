@@ -11,6 +11,8 @@ from Widgets.Check import Check
 from Widgets.Button import Button
 from Widgets.Anim import Anim
 from Widgets.Image import Image
+from Widgets.Entry2 import Entry2
+from Entities.Tile import Tile
 
 
 class Monde(World):
@@ -32,3 +34,5 @@ class Monde(World):
         self.uisys.add_widget(Button())
         self.uisys.add_widget(Anim())
         self.uisys.add_widget(Image())
+        self.uisys.add_widget(Entry2())
+        self.esys.add_entity(Tile())
