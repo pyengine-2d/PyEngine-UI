@@ -28,6 +28,9 @@ class PyEngineWidget(QWidget):
         for i in world.childs:
             if i.type_ == "Entity":
                 entities.add(create_entity(i))
+            if i.type_ == "Tilemap":
+                for e in create_tilemap(i):
+                    entities.add(e)
             elif i.type_ == "Label":
                 widgets.add(create_label(i))
             elif i.type_ == "Image":

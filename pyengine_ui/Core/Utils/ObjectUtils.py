@@ -190,7 +190,7 @@ properties = {
 parent = {
     "World": ["Window"],
     "Entity": ["World"],
-    "Tilemap": ["Tilemap"],
+    "Tilemap": ["World"],
     "PositionComponent": ["Entity"],
     "SpriteComponent": ["Entity"],
     "TextComponent": ["Entity"],

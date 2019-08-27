@@ -1,5 +1,7 @@
 from pyengine.Widgets import (Label, Button, Entry, Image, AnimatedImage, MultilineLabel, Console, Checkbox,
                               ProgressBar, Selector)
+from pyengine.Entities import Tilemap
+from pyengine.Components import PositionComponent
 from pyengine.Utils import Vec2, Color, Font
 
 import pygame
@@ -12,6 +14,23 @@ class Entity(pygame.sprite.Sprite):
         sprite = ""
         image = None
         rect = None
+
+
+def create_tilemap(obj):
+    pos_x = obj.properties["Position X"]
+    pos_y = obj.properties["Position Y"]
+    file = obj.properties["Fichier JSON"]
+    scale = obj.properties["Scale"]
+    tilemap = Tilemap(Vec2(pos_x, pos_y), file, scale)
+
+    tiles = []
+    for i in tilemap.tiles:
+        entity = Entity()
+        entity.pos = i.get_component(PositionComponent).position.coords
+        entity.image = i.image
+        tiles.append(entity)
+
+    return tiles
 
 
 def create_entity(obj):
