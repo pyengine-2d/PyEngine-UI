@@ -213,13 +213,9 @@ parent = {
 
 types = parent.keys()
 
+get_properties = lambda element: properties.get(element, [])
 
-def get_properties(element):
-    return properties.get(element, [])
-
-
-def get_parent_types(element):
-    return parent.get(element, [None])
+get_parent_types = lambda element: parent.get(element, [None])
 
 
 class Object:
